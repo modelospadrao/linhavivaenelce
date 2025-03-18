@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODELO RETORNO DE CAMPO LINHA VIVA</title>
+    <style>
+        body { font-family: Cambria, Cochin, Georgia, Times, sans-serif; }
+        .container { width: 90%; margin: auto; }
+        textarea { width: 100%; height: 469px; }
+        .hidden { display: none; }
+        input[type="text"], input[type="date"], input[type="number"], .supervisor-box, .preview-text {
+            width: 100%;
+            padding: 9px;
+            margin: 6px 0;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            text-transform: uppercase; /* Adicionando caixa alta */
+            background-color: #f0f0f0;
+        }
+        .button-default {
+            border: 1px solid black;
+            padding: 8px 16px;
+            margin: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .button-default:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .preview-box {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f0f0f0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .clear-button {
+            background-color: #f44336;
+            color: white;
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        
+        /* Estilo para os botões Sim/Não */
+        .button-yes {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+        }
+        .button-yes.selected {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
+        }
+        .button-no {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+        }
+        .button-no.selected {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center; font-size: 25px; font-weight: bold; color: #e63946;">MODELO RETORNO DE CAMPO LINHA VIVA</h2><h2 style="text-align: center; font-size: 21px; font-weight: bold; color: #000;">(Versão 1.0)</h2>
+        
+        <!-- Logo da ENEL -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Enel_Group_logo.svg" alt="Logo ENEL" style="width: 193px; height: auto; display: block; margin-left: auto; margin-right: auto;">
+        
+        <h2>Preencha os dados</h2>
+        
+        <label>LEAD:</label>
+        <input type="text" id="lead" maxlength="10" pattern="[A-Za-z0-9-]{10}" placeholder="XXX-XX-XXX" required title="INSIRA ATE 10 CARACTERES COM LETRAS, NÚMEROS E TRACO -">
+        
+        <label>DATA:</label>
+        <input type="date" id="data" required>
+        
+        <label>OT/ANE:</label>
+        <input type="text" id="ot_ane" maxlength="10" pattern="\d{10}" placeholder="INSIRA APENAS NÚMEROS">
+        
+        <label>BA:</label>
+        <input type="text" id="ba" maxlength="8" pattern="^\d{8}" required title="INSIRA APENAS NÚMEROS, ATÉ 8 DIGITOS">
+        
+        <label>SGD:</label>
+        <input type="text" id="sgd" maxlength="10" pattern="\d{10}" placeholder="INSIRA APENAS NÚMEROS">
+        
+        <label>INC:</label>
+        <input type="text" id="inc" maxlength="8" pattern="\d{10}" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS">
+        
+        <label>TRAFO:</label>
+        <input type="text" id="traf" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPACOS OU TRAÇOS">
+        
+        <label>ESTRUTURA:</label>
+        <input type="text" id="estrut" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPACOS OU TRAÇOS">
+        
+        <label>ALIM:</label>
+        <input type="text" id="alim" maxlength="7" pattern="[A-Za-z0-9]{7}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPACOS OU TRAÇOS">
+        
+        <h3>Serviço Realizado</h3>
+        <button class="button-default" onclick="toggleEditableField('servico')">Sim</button>
+        <button class="button-default" onclick="toggleEditableField('servico')">Não</button>
+        <div id="servico" class="hidden">
+            <label>Descrição:</label>
+            <input type="text" class="preview-text" id="descricaoServico">
+        </div>
+        
+        <h3>Material Utilizado</h3>
+        <button class="button-default" onclick="toggleEditableField('material')">Sim</button>
+        <button class="button-default" onclick="toggleEditableField('material')">Não</button>
+        <div id="material" class="hidden">
+            <label>Descrição:</label>
+            <input type="text" class="preview-text" id="descricaoMaterial">
+        </div>
+        
+        <h3>Devolução Sucata Gerada</h3>
+        <button class="button-default" onclick="toggleEditableField('sucata')">Sim</button>
+        <button class="button-default" onclick="toggleEditableField('sucata')">Não</button>
+        <div id="sucata" class="hidden">
+            <label>Descrição:</label>
+            <input type="text" class="preview-text" id="descricaoSucata">
+        </div>
+        
+        <h3>Necessário Outro Recurso?</h3>
+        <button class="button-default" onclick="toggleEditableField('recurso')">Sim</button>
+        <button class="button-default" onclick="toggleEditableField('recurso')">Não</button>
+        <div id="recurso" class="hidden">
+            <label>Descrição:</label>
+            <input type="text" class="preview-text" id="descricaoRecurso">
+        </div>
+        
+        <br><br>
+        <button class="button-default" onclick="gerarMensagem()">Gerar Mensagem</button>
+        <button class="button-default" onclick="copiarMensagem()">Copiar Mensagem</button>
+        <button class="button-default" onclick="enviarWhatsApp()">Encaminhar para WhatsApp</button>
+	<button class="clear-button" onclick="limparMensagem()">Limpar Mensagem</button>
+        
+        <br><br>
+        
+        <h3>Pré-Visualização da Mensagem</h3>
+        <div id="previewBox" class="preview-box"></div>
+
+</div>
+    <p style="text-align: center; font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 40px;"> © 2025 Emanuel Aguiar (Assistente Administrativo Insourcing - Enel CE)<br>Todos os direitos reservados.</p>
+      
+
+        <!-- Popup -->
+        <div id="popup">Mensagem Copiada!</div>
+    </div>
+
+    <script>
+        // Validações e manipulações de dados
+        function toggleEditableField(field) {
+            let element = document.getElementById(field);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        // Função para formatar a data no formato brasileiro
+        function formatarData(data) {
+            const partes = data.split("-");
+            return `${partes[2]}/${partes[1]}/${partes[0]}`;
+        }
+
+        function gerarMensagem() {
+    let msg = `----------------- *DADOS DA BAIXA* -----------------\n`;
+    msg += `*LEAD:* ${document.getElementById('lead').value.toUpperCase()}\n`;
+    msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
+    msg += `*OT/ANE:* ${document.getElementById('ot_ane').value.toUpperCase()}\n`;
+    msg += `*BA:* BA${document.getElementById('ba').value.toUpperCase()}\n`;
+    msg += `*SGD:* ${document.getElementById('sgd').value.toUpperCase()}\n`;
+    msg += `*INC:* 00${document.getElementById('inc').value.toUpperCase()}\n`;
+    msg += `*TRAFO:* ${document.getElementById('traf').value.toUpperCase()}\n`;
+    msg += `*ESTRUTURA:* ${document.getElementById('estrut').value.toUpperCase()}\n`;
+    msg += `*ALIM:* ${document.getElementById('alim').value.toUpperCase()}\n`;
+    msg += `-----------------------------------------------------\n`;
+
+    if (document.getElementById('servico').classList.contains('hidden') === false) {
+        msg += `*SERVICO REALIZADO* \n${document.getElementById('descricaoServico').value.toUpperCase()}\n`;
+    }
+    if (document.getElementById('material').classList.contains('hidden') === false) {
+        msg += `*MATERIAL UTILIZADO* \n${document.getElementById('descricaoMaterial').value.toUpperCase()}\n`;
+    }
+    if (document.getElementById('sucata').classList.contains('hidden') === false) {
+        msg += `*DEVOLUÇÃO SUCATA GERADA* \n${document.getElementById('descricaoSucata').value.toUpperCase()}\n`;
+    }
+    if (document.getElementById('recurso').classList.contains('hidden') === false) {
+        msg += `*NECESSÁRIO OUTRO RECURSO?* \n${document.getElementById('descricaoRecurso').value.toUpperCase()}\n`;
+    }
+    msg += `--------------------------------------------------------\n`;
+
+    // Convertendo a mensagem inteira para maiúsculas
+    document.getElementById('previewBox').textContent = msg.toUpperCase();
+}
+
+        function copiarMensagem() {
+            let mensagem = document.getElementById('previewBox').textContent;
+            navigator.clipboard.writeText(mensagem).then(function() {
+                document.getElementById('popup').style.display = 'block';
+                setTimeout(() => document.getElementById('popup').style.display = 'none', 2000);
+            });
+        }
+
+        function limparMensagem() {
+    document.getElementById('previewBox').textContent = '';
+}
+
+
+        function enviarWhatsApp() {
+            const mensagem = encodeURIComponent(document.getElementById('previewBox').textContent.toUpperCase()); // Convertendo para maiúsculas ao enviar
+            const url = `https://wa.me/?text=${mensagem}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
