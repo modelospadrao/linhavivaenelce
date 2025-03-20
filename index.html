@@ -309,7 +309,7 @@
     msg += `*TRAFO:* ${document.getElementById('traf').value.toUpperCase()}\n`;
     msg += `*ESTRUTURA:* ${document.getElementById('estrut').value.toUpperCase()}\n`;
     msg += `*ALIM:* ${document.getElementById('alim').value.toUpperCase()}\n`;
-    msg += `-----------------------------------------------------\n`;
+    msg += `----------------------------------------------------\n`;
     
      
     if (document.getElementById('servico').classList.contains('hidden') === false) {
@@ -324,7 +324,7 @@
     if (document.getElementById('recurso').classList.contains('hidden') === false) {
         msg += `*NECESSÁRIO OUTRO RECURSO?* \n${document.getElementById('descricaoRecurso').value.toUpperCase()}\n`;
     }
-    msg += `--------------------------------------------------------\n`;
+    msg += `----------------------------------------------------\n`;
 
     // Convertendo a mensagem inteira para maiúsculas
     document.getElementById('previewBox').textContent = msg.toUpperCase();
