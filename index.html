@@ -313,16 +313,16 @@
     
      
     if (document.getElementById('servico').classList.contains('hidden') === false) {
-        msg += `*SERVICO REALIZADO* \n${document.getElementById('descricaoServico').value.toUpperCase()}\n`;
+        msg += `*SERVICO REALIZADO* \n${document.getElementById('descricaoServico').value.toUpperCase()}\n\n`;
     }
     if (document.getElementById('material').classList.contains('hidden') === false) {
-        msg += `*MATERIAL UTILIZADO* \n${document.getElementById('descricaoMaterial').value.toUpperCase()}\n`;
+        msg += `*MATERIAL UTILIZADO* \n${document.getElementById('descricaoMaterial').value.toUpperCase()}\n\n`;
     }
     if (document.getElementById('sucata').classList.contains('hidden') === false) {
-        msg += `*DEVOLUÇÃO SUCATA GERADA* \n${document.getElementById('descricaoSucata').value.toUpperCase()}\n`;
+        msg += `*DEVOLUÇÃO SUCATA GERADA* \n${document.getElementById('descricaoSucata').value.toUpperCase()}\n\n`;
     }
     if (document.getElementById('recurso').classList.contains('hidden') === false) {
-        msg += `*NECESSÁRIO OUTRO RECURSO?* \n${document.getElementById('descricaoRecurso').value.toUpperCase()}\n`;
+        msg += `*NECESSÁRIO OUTRO RECURSO?* \n${document.getElementById('descricaoRecurso').value.toUpperCase()}\n\n`;
     }
     msg += `----------------------------------------------------\n`;
 
