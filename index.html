@@ -78,7 +78,7 @@
       color: #fff; background-color: #000; padding: 10px;
       border-radius: 8px; z-index: 1001; display: none;
     }
-    /* Popups padrão (Atualização, Boas-vindas, notificações, cópia, opções e confirmação) */
+    /* Popups padrão (Atualização, Boas-vindas, notificações, cópia, opções, confirmação) */
     .popup {
       display: none; position: fixed;
       top: 50%; left: 50%;
@@ -86,9 +86,7 @@
       padding: 20px; background-color: rgba(0,0,0,0.8);
       color: white; font-size: 16px; border-radius: 5px;
       z-index: 1000; box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      text-align: center;
       text-align: left;
-       
     }
     .popup-buttons {
       display: flex; justify-content: space-around; margin-top: 10px;
@@ -98,8 +96,27 @@
       font-size: 14px;
       border-radius: 8px;
       margin: 4px;
+      border: 1px solid #fff;
       cursor: pointer;
       transition: background-color 0.2s ease;
+    }
+    /* Efeito de shake para alertas */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-10px); }
+      40% { transform: translateX(10px); }
+      60% { transform: translateX(-10px); }
+      80% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
+    .shake {
+      animation: shake 0.5s;
+    }
+    /* Container para os botões de compartilhamento, etc. */
+    .share-buttons {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
     /* Overlay que intercepta cliques se a BAIXA não for iniciada */
     #clickOverlay {
@@ -126,19 +143,53 @@
       display: block; width: fit-content; margin-left: auto; margin-right: auto;
       position: relative; z-index: 3000;
     }
+    /* Popup de aviso de PDF não salvo (para reinício) */
+    #pdf-warning-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px; background-color: #ffcccc;
+      color: #000;
+      font-size: 16px;
+      border: 2px solid #ff0000;
+      border-radius: 8px;
+      z-index: 1500;
+      text-align: center;
+    }
+    /* Popup de lembrete de PDF não salvo após compartilhar via WhatsApp */
+    #pdf-reminder-popup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px; background-color: #ffcccc;
+      color: #000;
+      font-size: 16px;
+      border: 2px solid #ff0000;
+      border-radius: 8px;
+      z-index: 1500;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <!-- Overlay que intercepta cliques em toda a página se a BAIXA não for iniciada -->
+  <!-- Overlay -->
   <div id="clickOverlay"></div>
   
   <!-- Global Clock -->
   <div id="global-clock"></div>
   
-  <!-- Popup de Atualização (novo popup que aparece primeiro) -->
+  <!-- Popup de Atualização -->
   <div id="update-popup" class="popup">
-    <p>⚠️ NOTAS DE ATUALIZAÇÃO DE MELHORIAS!!!<br>
-   <br>1️⃣ O Campo de "Pré-Visualização da Mensagem" é atualizado automaticamente sempre que o usuário altera algum dado!<br> Além disso, se o usuário ficar inativo, a mensagem será atualizada automaticamente.<br>O botão “Gerar Mensagem” continua disponível de forma manual.<br><br>2️⃣ Foram inseridos opções pré formatadas em casos de respostas "NÃO" selecionadas no questionário!</p>
+    <p>⚠️ NOTAS DE ATUALIZAÇÃO!!!<br><br>
+       1️⃣ O Campo de "Pré-Visualização da Mensagem" é preenchido automaticamente sempre que o usuário altera algum dado!<br>
+       2️⃣ Foram inseridas opções pré-formatadas em casos de respostas "NÃO" no questionário!<br>
+       3️⃣ Foram inseridos alertas para o salvamento do arquivo em PDF como opção de controle pessoa!<br>
+       4️⃣ Foi Inserido um renomeador automático de arquivo com base no retorno preenchido no dia"<br>
+      <br>
     <button onclick="closeUpdatePopup()">Fechar</button>
   </div>
   
@@ -172,18 +223,32 @@
   </div>
   <div id="encaminhar-popup" class="popup">
     <p>Mensagem encaminhada com sucesso!<br>
-    No final do dia o responsável deverá incrementar no formulário essas evidências!</p>
+       No final do dia o responsável deverá incrementar no formulário essas evidências!</p>
     <button onclick="document.getElementById('encaminhar-popup').style.display='none'">Fechar</button>
   </div>
   
   <!-- Popup para confirmação de cópia -->
   <div id="popup" class="popup">Mensagem Copiada!</div>
   
-  <!-- Popup para exibição das opções ao clicar "Não" nas questões -->
+  <!-- Popup para exibição das opções ao clicar "Não" -->
   <div id="options-popup" class="popup"></div>
   
-  <!-- Popup para confirmação da seleção (mensagem padrão) -->
+  <!-- Popup para confirmação da seleção -->
   <div id="confirm-popup" class="popup"></div>
+  
+  <!-- Popup para aviso de PDF não salvo ao reiniciar -->
+  <div id="pdf-warning-popup">
+    <p>Você NÃO salvou o PDF!<br>Tem certeza que deseja reiniciar sem salvar o PDF?</p>
+    <div class="popup-buttons">
+      <button onclick="confirmReset()">Sim, reiniciar</button>
+      <button onclick="cancelReset()">Cancelar</button>
+    </div>
+  </div>
+  
+  <!-- Popup de lembrete de PDF não salvo após compartilhar via WhatsApp -->
+  <div id="pdf-reminder-popup">
+    <p>Atenção: Você não salvou o PDF! Salve-o para arquivar a evidência.</p>
+  </div>
   
   <!-- Popup que aparece ao clicar no overlay -->
   <div id="body-popup" onclick="this.style.display='none'; event.stopPropagation();">
@@ -199,7 +264,7 @@
     
     <!-- Agrupamento dos campos do formulário -->
     <div id="formFields">
-      <!-- Campo para digitação se escolher "Outro" -->
+      <!-- Campo para "Outro" -->
       <input type="text" id="outroLead" class="hidden" placeholder="Digite o nome do LEAD">
       
       <h2>Preencha os dados da execução</h2>
@@ -232,7 +297,7 @@
         <option value="Roberto Moreira Maciel">Roberto Moreira Maciel</option>
         <option value="Vanderson da Silva Lima">Vanderson da Silva Lima</option>
       </select>
-      <!-- Campo para digitação se escolher "Outro" -->
+      <!-- Campo para "Outro" -->
       <input type="text" id="outraPessoa" class="hidden" placeholder="Digite o nome da pessoa">
       
       <label for="lead">LEAD:</label>
@@ -245,7 +310,7 @@
         <option value="DFJ-LR-03B">DFJ-LR-03B</option>
         <option value="DFJ-LC-01B">DFJ-LC-01B</option>
       </select>
-      <!-- Campo para digitação se escolher "Outro" -->
+      <!-- Campo para "Outro" -->
       <input type="text" id="outroLead" class="hidden" placeholder="Digite o nome do LEAD">
       
       <label>OT/ANE:</label>
@@ -313,17 +378,22 @@
       <br><br>
       
       <button class="button-gerarMensagem" onclick="gerarMensagem(); document.getElementById('gerar-popup').style.display='block';">Gerar Mensagem</button>
-      <button class="button-default" onclick="copiarMensagem()">Copiar Mensagem</button>
-      <button class="button-enviarWhatsApp" onclick="enviarWhatsApp(); document.getElementById('encaminhar-popup').style.display='block';">Encaminhar para WhatsApp</button>
-      <button class="clear-button" onclick="limparMensagem(); document.getElementById('limpar-popup').style.display='block';">Limpar Mensagem</button>
-      
-      <button id="pdfButton" class="button-default" onclick="savePdf()">Salvar PDF</button>
       
       <br><br>
       
       <h3>Pré-Visualização da Mensagem</h3>
       <div id="previewBox" class="preview-box"></div>
-      <br><br>
+      
+      <!-- Container para os botões de compartilhar, encaminhar, copiar e salvar PDF -->
+      <div class="share-buttons">
+        <button class="button-default" onclick="copiarMensagem()">Copiar Mensagem</button>
+        <button class="button-enviarWhatsApp" onclick="enviarWhatsApp()">Encaminhar para WhatsApp</button>
+        <button class="clear-button" onclick="limparMensagem(); document.getElementById('limpar-popup').style.display='block';">Limpar Mensagem</button>
+        <button id="pdfButton" class="button-default" onclick="savePdf()">Salvar PDF</button>
+      </div>
+      
+      <br>
+      
       <!-- Logo da ENEL -->
       <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Enel_Group_logo.svg" alt="Logo ENEL" style="width: 193px; height: auto; display: block; margin-left: auto; margin-right: auto;">    
     </div>
@@ -336,7 +406,7 @@
   <!-- Popup para confirmação de cópia -->
   <div id="popup" class="popup">Mensagem Copiada!</div>
   
-  <!-- Botões adicionais para Reiniciar e Salvar PDF -->
+  <!-- Botões adicionais para Reiniciar -->
   <div class="container" style="text-align: center; margin-top: 20px;">
     <button style="text-align: center; font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 10px;" id="reset-button" onclick="resetSprint()">REINICIAR</button>
   </div>
@@ -473,7 +543,21 @@
       document.getElementById('clickOverlay').style.display = 'block';
     }
     function resetSprint() {
+      // Se o PDF ainda não foi salvo, exibe o popup de aviso com efeito shake
+      if (!pdfSaved) {
+        let pdfWarning = document.getElementById('pdf-warning-popup');
+        pdfWarning.classList.add('shake');
+        pdfWarning.style.display = 'block';
+      } else {
+        window.location.reload();
+      }
+    }
+    function confirmReset() {
+      document.getElementById('pdf-warning-popup').style.display = 'none';
       window.location.reload();
+    }
+    function cancelReset() {
+      document.getElementById('pdf-warning-popup').style.display = 'none';
     }
     /* Função que gera a mensagem de preview */
     function gerarMensagem() {
@@ -543,29 +627,71 @@
       const mensagem = encodeURIComponent(document.getElementById('previewBox').textContent.toUpperCase());
       const url = `https://wa.me/?text=${mensagem}`;
       window.open(url, '_blank');
+      // Se o PDF não foi salvo, exibe um lembrete
+      if (!pdfSaved) {
+        let reminder = document.getElementById('pdf-reminder-popup');
+        reminder.classList.add('shake');
+        reminder.style.display = 'block';
+        setTimeout(() => {
+          reminder.style.display = 'none';
+          reminder.classList.remove('shake');
+        }, 3000);
+      }
     }
     function savePdf() {
-      gerarMensagem();
-      var container = document.querySelector('.container');
-      var width = container.offsetWidth;
-      var height = container.offsetHeight;
-      let now = new Date();
-      let fileName = `Retorno_Campo_${now.toISOString()}.pdf`;
-      html2pdf().set({
-        margin: 0,
-        filename: fileName,
-        image: { type: 'jpeg', quality: 0.99 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'px', format: [width, height], orientation: 'portrait' }
-      }).from(container).save().then(() => {
-        const pdfButton = document.getElementById('pdfButton');
-        pdfButton.textContent = 'PDF Já Salvo';
-        pdfButton.style.backgroundColor = '#4CAF50';
-        pdfButton.style.color = '#fff';
-        pdfButton.style.border = '1px solid #4CAF50';
-        pdfButton.disabled = true;
-      });
-    }
+  gerarMensagem();
+  var container = document.querySelector('.container');
+  var width = container.offsetWidth;
+  var height = container.offsetHeight;
+  
+  // Recupera e prepara os valores para o nome do arquivo
+  let lead = document.getElementById('lead').value.trim();
+  let data = document.getElementById('data').value.trim();
+  let ot_ane = document.getElementById('ot_ane').value.trim();
+  let inc = document.getElementById('inc').value.trim();
+  let endereco = document.getElementById('endereco').value.trim();
+  
+  // Converte a data para o formato brasileiro dd_mm_yyyy
+  if (data !== "") {
+    let parts = data.split("-");
+    data = parts[2] + "_" + parts[1] + "_" + parts[0];
+  }
+  
+  // Substitui os espaços por underlines
+  lead = lead.replace(/\s+/g, "_");
+  ot_ane = ot_ane.replace(/\s+/g, "_");
+  inc = inc.replace(/\s+/g, "_");
+  endereco = endereco.replace(/\s+/g, "_");
+  
+  // Monta o nome do arquivo dinamicamente
+  let fileName = "Retorno_Campo_";
+  if (lead !== "") { fileName += lead; }
+  if (data !== "") { fileName += "_EM_" + data; }
+  // Usa ot_ane se estiver preenchido, senão usa inc (se preenchido)
+  if (ot_ane !== "") { fileName += "_ATRAVES_" + ot_ane; }
+  else if (inc !== "") { fileName += "_ATRAVES_" + inc; }
+  if (endereco !== "") { fileName += "_NO_ENDERECO_" + endereco; }
+  fileName += ".pdf";
+  
+  // Converte o nome do arquivo para maiúsculas
+  fileName = fileName.toUpperCase();
+  
+  html2pdf().set({
+    margin: 0,
+    filename: fileName,
+    image: { type: 'jpeg', quality: 0.99 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'px', format: [width, height], orientation: 'portrait' }
+  }).from(container).save().then(() => {
+    const pdfButton = document.getElementById('pdfButton');
+    pdfButton.textContent = 'PDF JÁ SALVO';
+    pdfButton.style.backgroundColor = '#4CAF50';
+    pdfButton.style.color = '#fff';
+    pdfButton.style.border = '1px solid #4CAF50';
+    pdfButton.disabled = true;
+    pdfSaved = true;
+  });
+}
     /* Função para exibir o overlay e o popup de bloqueio */
     document.getElementById('clickOverlay').addEventListener('click', function(e) {
       document.getElementById('body-popup').style.display = 'block';
@@ -575,7 +701,7 @@
       document.getElementById('update-popup').style.display = 'none';
       document.getElementById('welcome-popup').style.display = 'block';
     }
-    /* --- Nova funcionalidade: Popup com opções para cada "Não" com confirmação padrão --- */
+    /* --- Popup com opções para cada "Não" com confirmação padrão --- */
     function showOptionsPopup(field) {
       currentOptionField = field;
       const popup = document.getElementById('options-popup');
@@ -591,10 +717,8 @@
     }
     function confirmOption(field, option, btn) {
       currentOptionButton = btn;
-      // Aplica uma transição rápida para verde
       btn.style.backgroundColor = "#4CAF50";
       setTimeout(() => {
-        // Exibe o popup de confirmação com mensagem padrão
         let confirmPopup = document.getElementById('confirm-popup');
         confirmPopup.innerHTML = `<p>Tem certeza que deseja inserir a opção marcada?</p>
           <div class="popup-buttons">
@@ -610,9 +734,7 @@
     }
     function cancelConfirm() {
       document.getElementById('confirm-popup').style.display = 'none';
-      if(currentOptionButton) {
-        currentOptionButton.style.backgroundColor = "";
-      }
+      if(currentOptionButton) { currentOptionButton.style.backgroundColor = ""; }
     }
     function selectOption(field, optionText) {
       notas[field] = optionText;
@@ -623,23 +745,14 @@
     document.addEventListener('DOMContentLoaded', () => {
       const elementos = document.querySelectorAll('#formFields input, #formFields select, #formFields textarea');
       elementos.forEach(elem => {
-        elem.addEventListener('input', () => {
-          lastInteraction = Date.now();
-          gerarMensagem();
-        });
-        elem.addEventListener('change', () => {
-          lastInteraction = Date.now();
-          gerarMensagem();
-        });
+        elem.addEventListener('input', () => { lastInteraction = Date.now(); gerarMensagem(); });
+        elem.addEventListener('change', () => { lastInteraction = Date.now(); gerarMensagem(); });
       });
     });
     function scheduleAutoPreviewUpdate() {
       let diff = Date.now() - lastInteraction;
       let interval = (diff < 2 * 60 * 1000) ? 2 * 60 * 1000 : 3 * 60 * 1000;
-      setTimeout(() => {
-        gerarMensagem();
-        scheduleAutoPreviewUpdate();
-      }, interval);
+      setTimeout(() => { gerarMensagem(); scheduleAutoPreviewUpdate(); }, interval);
     }
     window.onload = function() {
       disableFields();
