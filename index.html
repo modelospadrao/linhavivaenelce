@@ -143,20 +143,22 @@
       display: block; width: fit-content; margin-left: auto; margin-right: auto;
       position: relative; z-index: 3000;
     }
-    /* Popup de aviso de PDF não salvo (para reinício) */
+    /* Popup de aviso de PDF não salvo ao reiniciar */
     #pdf-warning-popup {
       display: none;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 20px; background-color: #ffcccc;
+      padding: 20px;
+      background-color: #ffcccc;
       color: #000;
       font-size: 16px;
       border: 2px solid #ff0000;
       border-radius: 8px;
-      z-index: 1500;
+      z-index: 2001;  /* Garante que o popup fique acima de outros elementos */
       text-align: center;
+      pointer-events: auto;  /* Garantir que o popup receba interações */
     }
     /* Popup de lembrete de PDF não salvo após compartilhar via WhatsApp */
     #pdf-reminder-popup {
@@ -270,7 +272,7 @@
       <h2>Preencha os dados da execução</h2>
       
       <!-- Lista suspensa para o nome das pessoas -->
-      <label for="pessoa">Nome do Componete:</label>
+      <label for="pessoa">Nome do Componente:</label>
       <select id="pessoa" onchange="verificarOutraPessoa()">
         <option value="NENHUM">NENHUM</option>
         <option value="Ademar Marcos Garcia da Silva">Ademar Marcos Garcia da Silva</option>
