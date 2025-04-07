@@ -693,13 +693,13 @@
   endereco = endereco.replace(/\s+/g, "_");
   
   // Monta o nome do arquivo dinamicamente
-  let fileName = "Retorno_Campo_";
+  let fileName = "Retorno_Campo executado_";
   if (lead !== "") { fileName += lead; }
-  if (data !== "") { fileName += "_EM_" + data; }
+  if (data !== "") { fileName += "_em_" + data; }
   // Usa ot_ane se estiver preenchido, senão usa inc (se preenchido)
-  if (ot_ane !== "") { fileName += "_ATRAVES_" + ot_ane; }
-  else if (inc !== "") { fileName += "_ATRAVES_" + inc; }
-  if (endereco !== "") { fileName += "_NO_ENDERECO_" + endereco; }
+  if (ot_ane !== "") { fileName += "_Atraves OT-ANE_" + ot_ane; }
+  else if (inc !== "") { fileName += "_Atraves Incidência_" + inc; }
+  if (endereco !== "") { fileName += "_No endereco_" + endereco; }
   fileName += ".pdf";
   
   // Converte o nome do arquivo para maiúsculas
