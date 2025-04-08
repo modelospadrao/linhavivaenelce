@@ -573,9 +573,6 @@
     Todos os direitos reservados.
   </p>
   
-  <!-- Popup para confirmação de cópia -->
-  <div id="popup" class="popup">Mensagem Copiada!</div>
-  
   <div class="container" style="text-align: center; margin-top: 20px;">
     <button id="reset-button" style="font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 10px;" onclick="resetSprint()">
       REINICIAR
@@ -788,13 +785,13 @@
     }
 
     let notasMsg = "";
-    if (notas.servico) notasMsg += "Serviço não realizado pelo seguinte motivo: " + notas.servico + "\n";
-    if (notas.material) notasMsg += "Material não utilizado pelo seguinte motivo: " + notas.material + "\n";
-    if (notas.sucata) notasMsg += "Devolução sucata não foi gerada pelo seguinte motivo: " + notas.sucata + "\n";
-    if (notas.recurso) notasMsg += "Não é necessário outro recurso pelo seguinte motivo: " + notas.recurso + "\n";
+    if (notas.servico) notasMsg += "*SERVIÇO NÃO REALIZADO MOTIVO:*\n " + notas.servico + "\n\n";
+    if (notas.material) notasMsg += "*MATERIAL NÃO UTILIZADO MOTIVO:*\n " + notas.material + "\n\n";
+    if (notas.sucata) notasMsg += "*DEVOLUÇÃO SUCATA NÃO GERADA MOTIVO:*\n " + notas.sucata + "\n\n";
+    if (notas.recurso) notasMsg += "*NECESSÁRIO OUTRO RECURSO MOTIVO:*\n " + notas.recurso + "\n\n";
 
     if (notasMsg) {
-      msg += `NOTAS:\n${notasMsg}\n`;
+      msg += `*NOTAS:*\n${notasMsg}\n`;
     }
 
     let sessionTime = "";
