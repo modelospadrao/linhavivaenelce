@@ -9,87 +9,166 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
   <style>
     /* Estilos Gerais e do Formulário */
-    body { font-family: Cambria, Cochin, Georgia, Times, sans-serif; overscroll-behavior-y: none; }
-    .container { width: 90%; margin: auto; }
-    textarea { width: 100%; height: 469px; }
-    .hidden { display: none; }
+    body { 
+      font-family: Cambria, Cochin, Georgia, Times, sans-serif; 
+      overscroll-behavior-y: none; 
+    }
+    .container { 
+      width: 90%; 
+      margin: auto; 
+    }
+    textarea { 
+      width: 100%; 
+      height: 469px; 
+    }
+    .hidden { 
+      display: none; 
+    }
     input[type="text"], input[type="date"], input[type="number"], .supervisor-box, .preview-text {
-      width: 100%; padding: 9px; margin: 6px 0;
-      font-size: 14px; border: 1px solid #ddd;
-      text-transform: uppercase; background-color: #f0f0f0;
+      width: 100%; 
+      padding: 9px; 
+      margin: 6px 0;
+      font-size: 14px; 
+      border: 1px solid #ddd;
+      text-transform: uppercase; 
+      background-color: #f0f0f0;
     }
     input[type="tel"], select, input {
-      width: 100%; padding: 9px; margin: 6px 0;
-      font-size: 14px; border: 1px solid #ddd;
-      text-transform: uppercase; background-color: #f0f0f0;
+      width: 100%; 
+      padding: 9px; 
+      margin: 6px 0;
+      font-size: 14px; 
+      border: 1px solid #ddd;
+      text-transform: uppercase; 
+      background-color: #f0f0f0;
     }
-    /* Botões do formulário */
+    /* Botões do Formulário */
     .button-default {
-      border: 1px solid black; padding: 8px 16px; margin: 5px;
-      background-color: #fff; cursor: pointer; font-size: 14px;
-      border-radius: 4px; transition: all 0.3s ease;
+      border: 1px solid black; 
+      padding: 8px 16px; 
+      margin: 5px;
+      background-color: #fff; 
+      cursor: pointer; 
+      font-size: 14px;
+      border-radius: 4px; 
+      transition: all 0.3s ease;
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     .button-default.selected {
-      background-color: #000; color: #fff; border: 1px solid #000;
+      background-color: #000; 
+      color: #fff; 
+      border: 1px solid #000;
     }
-    .button-default:hover { box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+    .button-default:hover { 
+      box-shadow: 0 0 10px rgba(0,0,0,0.2); 
+    }
     .button-gerarMensagem {
-      background-color: #616964; color: white; padding: 8px 16px; margin: 5px;
-      cursor: pointer; font-size: 14px; border-radius: 4px;
-      transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      background-color: #616964; 
+      color: white; 
+      padding: 8px 16px; 
+      margin: 5px;
+      cursor: pointer; 
+      font-size: 14px; 
+      border-radius: 4px;
+      transition: all 0.3s ease; 
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     .button-enviarWhatsApp {
-      background-color: #00b145; color: white; padding: 8px 16px; margin: 5px;
-      cursor: pointer; font-size: 14px; border-radius: 4px;
-      transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      background-color: #00b145; 
+      color: white; 
+      padding: 8px 16px; 
+      margin: 5px;
+      cursor: pointer; 
+      font-size: 14px; 
+      border-radius: 4px;
+      transition: all 0.3s ease; 
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     .clear-button {
-      background-color: #f44336; color: white; padding: 8px 16px; margin: 5px;
-      cursor: pointer; font-size: 14px; border-radius: 4px;
-      transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      background-color: #f44336; 
+      color: white; 
+      padding: 8px 16px; 
+      margin: 5px;
+      cursor: pointer; 
+      font-size: 14px; 
+      border-radius: 4px;
+      transition: all 0.3s ease; 
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     .preview-box {
-      border: 1px solid #ddd; padding: 10px; margin-top: 20px;
-      background-color: #f0f0f0; white-space: pre-wrap;
-      font-family: monospace; font-size: 14px;
+      border: 1px solid #ddd; 
+      padding: 10px; 
+      margin-top: 20px;
+      background-color: #f0f0f0; 
+      white-space: pre-wrap;
+      font-family: monospace; 
+      font-size: 14px;
     }
-    /* Botões Sim/Não do toggle */
+    /* Botões Sim/Não */
     .button-yes {
-      background-color: #4CAF50; color: white; border: 1px solid #4CAF50;
-      padding: 8px 16px; font-size: 14px; border-radius: 4px;
-      cursor: pointer; margin: 0 5px;
+      background-color: #4CAF50; 
+      color: white; 
+      border: 1px solid #4CAF50;
+      padding: 8px 16px; 
+      font-size: 14px; 
+      border-radius: 4px;
+      cursor: pointer; 
+      margin: 0 5px;
     }
     .button-yes.selected {
-      background-color: #000; color: #fff; border: 1px solid #000;
+      background-color: #000; 
+      color: #fff; 
+      border: 1px solid #000;
     }
     .button-no {
-      background-color: #ff0000; color: #ffffff; border: 1px solid #ddd;
-      padding: 8px 16px; font-size: 14px; border-radius: 4px;
-      cursor: pointer; margin: 0 5px;
+      background-color: #ff0000; 
+      color: #ffffff; 
+      border: 1px solid #ddd;
+      padding: 8px 16px; 
+      font-size: 14px; 
+      border-radius: 4px;
+      cursor: pointer; 
+      margin: 0 5px;
     }
     .button-no.selected {
-      background-color: #000; color: #fff; border: 1px solid #000;
+      background-color: #000; 
+      color: #fff; 
+      border: 1px solid #000;
     }
     /* Global Clock */
     #global-clock {
-      position: fixed; top: 10px; left: 10px;
-      font-size: 24px; font-family: 'Courier New', Courier, monospace;
-      color: #fff; background-color: #000; padding: 10px;
-      border-radius: 8px; z-index: 1001; display: none;
+      position: fixed; 
+      top: 10px; 
+      left: 10px;
+      font-size: 24px; 
+      font-family: 'Courier New', Courier, monospace;
+      color: #fff; 
+      background-color: #000; 
+      padding: 10px;
+      border-radius: 8px; 
+      z-index: 1001; 
+      display: none;
     }
-    /* Popups padrão (Atualização, Boas-vindas, notificações, cópia, opções, confirmação) */
+    /* Popups padrão */
     .popup {
-      display: none; position: fixed;
-      top: 50%; left: 50%;
+      display: none; 
+      position: fixed;
+      top: 50%; 
+      left: 50%;
       transform: translate(-50%, -50%);
-      padding: 20px; background-color: rgba(0,0,0,0.8);
-      color: white; font-size: 16px; border-radius: 5px;
-      z-index: 1000; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      padding: 20px; 
+      background-color: rgba(0,0,0,0.8);
+      color: white; 
+      font-size: 16px; 
+      border-radius: 5px;
+      z-index: 1100; 
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
       text-align: left;
     }
     .popup-buttons {
-      display: flex; justify-content: space-around; margin-top: 10px;
+      display: flex; 
+      justify-content: space-around; 
+      margin-top: 10px;
     }
     .popup-buttons button {
       padding: 8px 16px;
@@ -100,50 +179,98 @@
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
-    /* Efeito de shake para alertas */
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      20% { transform: translateX(-10px); }
-      40% { transform: translateX(10px); }
-      60% { transform: translateX(-10px); }
-      80% { transform: translateX(10px); }
-      100% { transform: translateX(0); }
-    }
-    .shake {
-      animation: shake 0.5s;
-    }
-    /* Container para os botões de compartilhamento, etc. */
-    .share-buttons {
+    /* Popup de confirmação - fundo branco, texto em vermelho */
+    .popup-confirm {
+      background-color: #fff; 
+      color: red;            
+      font-size: 16px;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
-      margin-top: 10px;
-      margin-bottom: 10px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1200; 
+      display: none;
     }
-    /* Overlay que intercepta cliques se a BAIXA não for iniciada */
+    .popup-confirm .btn-sim {
+      background-color: green; 
+      color: white;
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      margin: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .popup-confirm .btn-nao {
+      background-color: red; 
+      color: white;
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      margin: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    /* Overlay para bloquear interações enquanto um popup estiver ativo (usado em opções) */
+    #popupOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 500; 
+      display: none;
+    }
+    /* Overlay já existente */
     #clickOverlay {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: transparent; z-index: 2000;
+      position: fixed; 
+      top: 0; left: 0;
+      width: 100%; 
+      height: 100%;
+      background-color: transparent; 
+      z-index: 2000;
       display: none;
     }
     /* Popup que aparece ao clicar no overlay */
     #body-popup {
-      display: none; position: fixed;
-      top: 20px; left: 50%;
+      display: none; 
+      position: fixed;
+      top: 20px; 
+      left: 50%;
       transform: translateX(-50%);
       background-color: rgba(0,0,0,0.85);
-      color: #fff; padding: 15px 20px;
-      border-radius: 8px; z-index: 2500; font-size: 18px;
+      color: #fff; 
+      padding: 15px 20px;
+      border-radius: 8px; 
+      z-index: 2500; 
+      font-size: 18px;
       cursor: pointer;
     }
-    /* Botão Reiniciar Sprint: garantir que fique acima do overlay */
+    /* Botão Reiniciar */
     #reset-button {
-      border: 1px solid black; padding: 8px 16px;
-      background-color: #000000; color: white; cursor: pointer;
-      font-size: 20px; border-radius: 32px; margin: 10px;
-      display: block; width: fit-content; margin-left: auto; margin-right: auto;
-      position: relative; z-index: 3000;
+      border: 1px solid black; 
+      padding: 8px 16px;
+      background-color: #000; 
+      color: white; 
+      cursor: pointer;
+      font-size: 20px; 
+      border-radius: 32px; 
+      margin: 10px;
+      display: block; 
+      width: fit-content; 
+      margin-left: auto; 
+      margin-right: auto;
+      position: relative; 
+      z-index: 3000;
     }
-    /* Popup de aviso de PDF não salvo ao reiniciar */
+    /* Popup de aviso de PDF não salvo */
     #pdf-warning-popup {
       display: none;
       position: fixed;
@@ -156,18 +283,19 @@
       font-size: 16px;
       border: 2px solid #ff0000;
       border-radius: 8px;
-      z-index: 2001;  /* Garante que o popup fique acima de outros elementos */
+      z-index: 2001;
       text-align: center;
-      pointer-events: auto;  /* Garantir que o popup receba interações */
+      pointer-events: auto;
     }
-    /* Popup de lembrete de PDF não salvo após compartilhar via WhatsApp */
+    /* Popup de lembrete de PDF não salvo */
     #pdf-reminder-popup {
       display: none;
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 15px; background-color: #ffcccc;
+      padding: 15px; 
+      background-color: #ffcccc;
       color: #000;
       font-size: 16px;
       border: 2px solid #ff0000;
@@ -178,24 +306,27 @@
   </style>
 </head>
 <body>
-  <!-- Overlay -->
+  <!-- Overlay para bloquear interações enquanto popup estiver ativo -->
+  <div id="popupOverlay"></div>
+  
+  <!-- Overlay já existente -->
   <div id="clickOverlay"></div>
   
   <!-- Global Clock -->
   <div id="global-clock"></div>
   
- <!-- Popup de Atualização -->
-<div id="update-popup" class="popup" style="font-size: 15px;">
-  <p>⚠️ NOTAS DE ATUALIZAÇÃO!!!<br><br>
-     1️⃣ O campo "Pré-Visualização da Mensagem" agora é preenchido automaticamente sempre que um valor é alterado.<br>
-     2️⃣ Foram adicionadas mensagens pré-formatadas quando marcadas a opção ("NÃO") no questionário.<br>
-     3️⃣ Incluídos alertas para lembrar de salvar o arquivo em PDF.<br>
-     4️⃣ Agora, o sistema renomeia automaticamente o arquivo PDF para facilitar sua localização, com base no retorno do preenchimento diário.<br>
-    <br>
-    <button onclick="closeUpdatePopup()" style="font-size: 15px; padding: 7px 125px; border-radius: 14px; background-color: #ffffff; color: black; border: none; cursor: pointer; display: block; margin: 0 auto;">
-    Fechar
-</button>
-</div>
+  <!-- Popup de Atualização -->
+  <div id="update-popup" class="popup" style="font-size: 15px;">
+    <p>⚠️ NOTAS DE ATUALIZAÇÃO!!!<br><br>
+       1️⃣ O campo "Pré-Visualização da Mensagem" agora é preenchido automaticamente sempre que um valor é alterado.<br>
+       2️⃣ Foram adicionadas mensagens pré-formatadas quando marcada a opção ("NÃO") no questionário.<br>
+       3️⃣ Incluídos alertas para lembrar de salvar o arquivo em PDF.<br>
+       4️⃣ Agora, o sistema renomeia automaticamente o arquivo PDF para facilitar sua localização, com base no retorno do preenchimento diário.<br>
+      <br>
+      <button onclick="closeUpdatePopup(); hideOverlay();" style="font-size: 15px; padding: 7px 125px; border-radius: 14px; background-color: #fff; color: black; border: none; cursor: pointer; display: block; margin: 0 auto;">
+        Fechar
+      </button>
+  </div>
   
   <!-- Popup de Boas-Vindas -->
   <div id="welcome-popup" class="popup">
@@ -219,16 +350,16 @@
   <!-- Popups adicionais para ações -->
   <div id="gerar-popup" class="popup">
     <p>Mensagem Gerada!</p>
-    <button onclick="document.getElementById('gerar-popup').style.display='none'">Fechar</button>
+    <button onclick="document.getElementById('gerar-popup').style.display='none'; hideOverlay();">Fechar</button>
   </div>
   <div id="limpar-popup" class="popup">
     <p>Mensagem limpa com sucesso!</p>
-    <button onclick="document.getElementById('limpar-popup').style.display='none'">Fechar</button>
+    <button onclick="document.getElementById('limpar-popup').style.display='none'; hideOverlay();">Fechar</button>
   </div>
   <div id="encaminhar-popup" class="popup">
     <p>Mensagem encaminhada com sucesso!<br>
        No final do dia o responsável deverá incrementar no formulário essas evidências!</p>
-    <button onclick="document.getElementById('encaminhar-popup').style.display='none'">Fechar</button>
+    <button onclick="document.getElementById('encaminhar-popup').style.display='none'; hideOverlay();">Fechar</button>
   </div>
   
   <!-- Popup para confirmação de cópia -->
@@ -237,11 +368,11 @@
   <!-- Popup para exibição das opções ao clicar "Não" -->
   <div id="options-popup" class="popup"></div>
   
-  <!-- Popup para confirmação da seleção -->
+  <!-- Popup para confirmação da seleção (usará a classe popup-confirm) -->
   <div id="confirm-popup" class="popup"></div>
   
-  <!-- Popup para aviso de PDF não salvo ao reiniciar -->
-  <div id="pdf-warning-popup">
+  <!-- Popup de aviso de PDF não salvo -->
+  <div id="pdf-warning-popup" class="popup">
     <p>Você NÃO salvou o PDF!<br>Tem certeza que deseja reiniciar sem salvar o PDF?</p>
     <div class="popup-buttons">
       <button onclick="confirmReset()">Sim, reiniciar</button>
@@ -249,15 +380,33 @@
     </div>
   </div>
   
-  <!-- Popup de lembrete de PDF não salvo após compartilhar via WhatsApp -->
-  <div id="pdf-reminder-popup">
+  <!-- Popup para os campos obrigatórios -->
+  <div id="obrigatorio-popup" class="popup">
+    <p>Por favor, preencha os seguintes campos obrigatórios:<br>
+      <!-- A mensagem será definida dinamicamente -->
+    </p>
+    <div class="popup-buttons">
+      <button onclick="document.getElementById('obrigatorio-popup').style.display='none';">Fechar</button>
+    </div>
+  </div>
+  
+  <!-- Popup de lembrete de PDF não salvo -->
+  <div id="pdf-reminder-popup" class="popup">
     <p>Atenção: Você não salvou o PDF! Salve-o para arquivar a evidência.</p>
   </div>
   
+  <!-- Novo Popup Diferenciado para alerta de seleção -->
+  <div id="atencao-popup" class="popup-atencao">
+    <p>Por favor, conclua a opção atual antes de selecionar outra pergunta.</p>
+    <div class="popup-buttons">
+      <button onclick="document.getElementById('atencao-popup').style.display='none';">Fechar</button>
+    </div>
+  </div>
+  
   <!-- Popup que aparece ao clicar no overlay -->
-  <div id="body-popup" onclick="this.style.display='none'; event.stopPropagation();">
+  <div id="body-popup" class="popup" onclick="this.style.display='none'; event.stopPropagation();">
     ⚠️ ATENÇÃO: Todos os campos estão bloqueados!<br>
-    Reinicie a página utilizando o botão "Reiniciar".
+    Reinicie a página utilizando o botão "REINICIAR".
   </div>
   
   <div class="container">
@@ -266,14 +415,11 @@
     </h2>
     <h2 style="text-align: center; font-size: 21px; font-weight: bold; color: #000;">(Versão 3.0)</h2>
     
-    <!-- Agrupamento dos campos do formulário -->
+    <!-- Campos do Formulário -->
     <div id="formFields">
-      <!-- Campo para "Outro" -->
       <input type="text" id="outroLead" class="hidden" placeholder="Digite o nome do LEAD">
-      
       <h2>Preencha os dados da execução</h2>
       
-      <!-- Lista suspensa para o nome das pessoas -->
       <label for="pessoa">Nome do Componente:</label>
       <select id="pessoa" onchange="verificarOutraPessoa()">
         <option value="NENHUM">NENHUM</option>
@@ -321,9 +467,7 @@
         <option value="Roberto Moreira Maciel">Roberto Moreira Maciel</option>
         <option value="Vanderson da Silva Lima">Vanderson da Silva Lima</option>
         <option value="Weliton De Souza Silva">Weliton De Souza Silva</option>
-
       </select>
-      <!-- Campo para "Outro" -->
       <input type="text" id="outraPessoa" class="hidden" placeholder="Digite o nome da pessoa">
       
       <label for="lead">LEAD:</label>
@@ -342,7 +486,6 @@
         <option value="DFJ-LR-02B">DFJ-LR-02B</option>
         <option value="DFJ-LR-03B">DFJ-LR-03B</option>
       </select>
-      <!-- Campo para "Outro" -->
       
       <label>OT/ANE:</label>
       <input type="tel" id="ot_ane" maxlength="7" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS">
@@ -354,28 +497,28 @@
       <input type="date" id="data" required>
       
       <label>BA:</label>
-      <input type="tel" id="ba" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DIGITOS">
+      <input type="tel" id="ba" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS">
       
       <label>SGD:</label>
-      <input type="tel" id="sgd" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DIGITOS">
+      <input type="tel" id="sgd" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS">
       
       <label>INC:</label>
-      <input type="tel" id="inc" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DIGITOS">
+      <input type="tel" id="inc" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS">
       
       <label>APR:</label>
-      <input type="tel" id="apr" maxlength="11" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 11 DIGITOS">
+      <input type="tel" id="apr" maxlength="11" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 11 DÍGITOS">
       
       <label>TRAFO:</label>
-      <input type="text" id="traf" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPACOS OU TRAÇOS, 10 DIGITOS">
+      <input type="text" id="traf" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 10 DÍGITOS">
       
       <label>ESTRUTURA:</label>
-      <input type="text" id="estrut" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPACOS OU TRAÇOS, 10 DIGITOS">
+      <input type="text" id="estrut" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 10 DÍGITOS">
       
       <label>ALIM:</label>
-      <input type="text" id="alim" maxlength="7" pattern="[A-Za-z0-9]{7}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPACOS OU TRAÇOS, 7 DIGITOS">
-  
+      <input type="text" id="alim" maxlength="7" pattern="[A-Za-z0-9]{7}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 7 DÍGITOS">
+      
       <label>ENDEREÇO:</label>
-      <input type="text" id="endereco" placeholder="INSIRA ENDERECO COMPLETO">
+      <input type="text" id="endereco" placeholder="INSIRA ENDEREÇO COMPLETO">
       
       <h3>Serviço Realizado?</h3>
       <button class="button-default" data-field="servico" onclick="toggleEditableField('servico', 'sim', this)">Sim</button>
@@ -402,34 +545,32 @@
       </div>
       
       <h3>Necessário Outro Recurso?</h3>
-      <button class="button-default" data-field="recurso" onclick="toggleEditableField('recurso', 'sim', this)">Sim</button>
-      <button class="button-default" data-field="recurso" onclick="toggleEditableField('recurso', 'nao', this)">Não</button>
+      <button class="button-default" data-field="recurso" onclick="toggleEditableField('recurso', 'sim', this)">Não</button>
+      <button class="button-default" data-field="recurso" onclick="toggleEditableField('recurso', 'nao', this)">Sim</button>
       <div id="recurso" class="hidden">
         <label>Descrição:</label>
         <input type="text" class="preview-text" id="descricaoRecurso">
       </div>
       
       <br><br>
-      
-      <button class="button-gerarMensagem" onclick="gerarMensagem(); document.getElementById('gerar-popup').style.display='block';">Gerar Mensagem</button>
+      <button class="button-gerarMensagem" onclick="gerarMensagem(); document.getElementById('gerar-popup').style.display='block'; showOverlay();">
+        Gerar Mensagem
+      </button>
       
       <br><br>
-      
       <h3>Pré-Visualização da Mensagem</h3>
       <div id="previewBox" class="preview-box"></div>
       
-      <!-- Container para os botões de compartilhar, encaminhar, copiar e salvar PDF -->
       <div class="share-buttons">
         <button class="button-default" onclick="copiarMensagem()">Copiar Mensagem</button>
         <button class="button-enviarWhatsApp" onclick="enviarWhatsApp()">Encaminhar para WhatsApp</button>
-        <button class="clear-button" onclick="limparMensagem(); document.getElementById('limpar-popup').style.display='block';">Limpar Mensagem</button>
+        <button class="clear-button" onclick="limparMensagem(); document.getElementById('limpar-popup').style.display='block'; showOverlay();">
+          Limpar Mensagem
+        </button>
         <button id="pdfButton" class="button-default" onclick="savePdf()">Salvar PDF</button>
       </div>
-      
       <br>
-      
-      <!-- Logo da ENEL -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Enel_Group_logo.svg" alt="Logo ENEL" style="width: 193px; height: auto; display: block; margin-left: auto; margin-right: auto;">    
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Enel_Group_logo.svg" alt="Logo ENEL" style="width: 193px; height: auto; display: block; margin: auto;">
     </div>
   </div>
   <p style="text-align: center; font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 40px;">
@@ -440,42 +581,62 @@
   <!-- Popup para confirmação de cópia -->
   <div id="popup" class="popup">Mensagem Copiada!</div>
   
-  <!-- Botões adicionais para Reiniciar -->
   <div class="container" style="text-align: center; margin-top: 20px;">
-    <button style="text-align: center; font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 10px;" id="reset-button" onclick="resetSprint()">REINICIAR</button>
+    <button id="reset-button" style="font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 10px;" onclick="resetSprint()">
+      REINICIAR
+    </button>
   </div>
   
   <script>
-    /* Variáveis Globais */
+    // Funções para mostrar e esconder o overlay que bloqueia o background
+    function showOverlay() {
+      document.getElementById('popupOverlay').style.display = 'block';
+    }
+    function hideOverlay() {
+      document.getElementById('popupOverlay').style.display = 'none';
+    }
+    
+    // Se o usuário clicar no overlay, exibe o popup de alerta para finalizar a ação atual
+    document.getElementById('popupOverlay').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('atencao-popup').style.display = 'block';
+    });
+    
     let globalTimerStart = null;
     let globalTimerInterval = null;
     let pdfSaved = false;
     let lastInteraction = Date.now();
     let currentOptionField = "";
-    let currentOptionButton = null; // Guarda referência ao botão clicado
-    // Objeto para armazenar as notas dos campos
+    let currentOptionButton = null;
+    
     let notas = {
       servico: "",
       material: "",
       sucata: "",
       recurso: ""
     };
-    // Opções pré-definidas para cada campo quando o usuário clicar "Não"
-    const optionsForField = {
-      servico: ["Carros no local", "Outros"],
-      material: ["Não foi solicitado para este atendimento", "Não houve utilização de material", "Apoio de outra equipe", "Outros"],
-      sucata: ["Sem sucata gerada", "Não houve recolha", "Problema na identificação", "Outros"],
-      recurso: ["Recurso não solicitado", "Serviço concluído 100%", "Não houve necessidade", "Outros"]
-    };
-    // Mensagens customizadas para cada campo
-    const messagesForField = {
-      servico: "Tem certeza que não executou o serviço? Selecione o motivo:",
-      material: "Tem certeza que não utilizou o material? Selecione o motivo:",
-      sucata: "Tem certeza que não gerou a devolução de sucata? Selecione o motivo:",
-      recurso: "Tem certeza que não foi necessário outro recurso? Selecione o motivo:"
+
+    let fieldsAnswered = {
+      servico: false,
+      material: false,
+      sucata: false,
+      recurso: false
     };
 
-    /* Funções de Validação e Toggle */
+      const optionsForField = {
+      servico: ["CARROS NO LOCAL", "FALTA DE TEMPO HÁBIL", "OUTROS"],
+      material: ["NÃO FOI SOLICITADO MATERIAL PARA ESTE ATENDIMENTO", "NÃO HOUVE UTILIZAÇÃO DE MATERIAL", "APOIO DE OUTRA EQUIPE", "OUTROS"],
+      sucata: ["SEM SUCATA GERADA", "OUTROS"],
+      recurso: ["SERVIÇO CONCLUÍDO 100%", "ENVIAR EQUIPE PESADA", "NECESSARIO EQUIPE DE PODA", "NECESSARIO RECOLHA DE RESÍDUOS", "NECESSÁRIO EQUIPE DO EMERGENCIAL", "OUTROS"]
+    };
+
+    const messagesForField = {
+      servico: "SELECIONE O MOTIVO:",
+      material: "SELECIONE O MOTIVO:",
+      sucata: "SELECIONE O MOTIVO:",
+      recurso: "SELECIONE O MOTIVO:"
+    };
+
     document.addEventListener("DOMContentLoaded", function () {
       const camposNumericos = ["ot_ane", "ba", "sgd", "inc"];
       camposNumericos.forEach(id => {
@@ -492,13 +653,20 @@
         });
       });
     });
+
     function toggleEditableField(field, choice, btn) {
+      if(document.getElementById('options-popup').style.display === 'block' ||
+         document.getElementById('confirm-popup').style.display === 'block'){
+        document.getElementById('atencao-popup').style.display = 'block';
+        showOverlay();
+        return;
+      }
       const container = document.getElementById(field);
       if (choice === 'sim') {
         container.classList.remove('hidden');
-        // Limpa qualquer nota previamente definida para o campo
+        fieldsAnswered[field] = true;
         if(notas.hasOwnProperty(field)) { notas[field] = ""; }
-      } else { // choice === 'nao'
+      } else {
         if(["servico", "material", "sucata", "recurso"].includes(field)) {
           container.classList.add('hidden');
           showOptionsPopup(field);
@@ -510,11 +678,12 @@
       buttons.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
     }
+
     function formatarData(data) {
       const partes = data.split("-");
       return `${partes[2]}/${partes[1]}/${partes[0]}`;
     }
-    /* Funções para habilitar/desabilitar os campos */
+
     function disableFields() {
       const formFields = document.getElementById("formFields");
       const fields = formFields.querySelectorAll("input, select, textarea, button");
@@ -525,7 +694,7 @@
       const fields = formFields.querySelectorAll("input, select, textarea, button");
       fields.forEach(field => { field.disabled = false; });
     }
-    /* Funções do Temporizador e PDF */
+
     function formatTime(totalSeconds) {
       let minutes = Math.floor(totalSeconds / 60);
       let seconds = totalSeconds % 60;
@@ -546,7 +715,6 @@
       let horas = date.getHours();
       let minutos = date.getMinutes();
       let segundos = date.getSeconds();
-      mes = mes.charAt(0).toUpperCase() + mes.slice(1);
       let strHoras = `${horas} ${horas === 1 ? "hora" : "horas"}`;
       let strMinutos = `${minutos} ${minutos === 1 ? "minuto" : "minutos"}`;
       let strSegundos = `${segundos} ${segundos === 1 ? "segundo" : "segundos"}`;
@@ -567,6 +735,7 @@
       enableFields();
       document.getElementById('clickOverlay').style.display = 'none';
       document.getElementById('body-popup').style.display = 'none';
+      hideOverlay();
     }
     function handleNoSprint() {
       document.getElementById('welcome-popup').style.display = 'none';
@@ -577,7 +746,6 @@
       document.getElementById('clickOverlay').style.display = 'block';
     }
     function resetSprint() {
-      // Se o PDF ainda não foi salvo, exibe o popup de aviso com efeito shake
       if (!pdfSaved) {
         let pdfWarning = document.getElementById('pdf-warning-popup');
         pdfWarning.classList.add('shake');
@@ -593,153 +761,198 @@
     function cancelReset() {
       document.getElementById('pdf-warning-popup').style.display = 'none';
     }
-    /* Função que gera a mensagem de preview */
+
     function gerarMensagem() {
-      let msg = `----------------- *DADOS DA BAIXA* -----------------\n`;
-      msg += `*NOME:* ${document.getElementById('pessoa').value.toUpperCase()}\n`;
-      msg += `*LEAD:* ${document.getElementById('lead').value.toUpperCase()}\n`;
-      msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
-      msg += `*OT/ANE:* ${document.getElementById('ot_ane').value.toUpperCase()}\n`;
-      msg += `*SGM:* ${document.getElementById('sgm').value.toUpperCase()}\n`;
-      msg += `*BA:* BA${document.getElementById('ba').value.toUpperCase()}\n`;
-      msg += `*SGD:* ${document.getElementById('sgd').value.toUpperCase()}\n`;
-      msg += `*INC:* 00${document.getElementById('inc').value.toUpperCase()}\n`;
-      msg += `*APR:* 00${document.getElementById('apr').value.toUpperCase()}\n`;
-      msg += `*TRAFO:* ${document.getElementById('traf').value.toUpperCase()}\n`;
-      msg += `*ESTRUTURA:* ${document.getElementById('estrut').value.toUpperCase()}\n`;
-      msg += `*ALIM:* ${document.getElementById('alim').value.toUpperCase()}\n`;
-      msg += `*END:* ${document.getElementById('endereco').value.toUpperCase()}\n`;
-      msg += `----------------------------------------------------\n`;
+    let msg = `----------------- *DADOS DA BAIXA* -----------------\n`;
+    msg += `*NOME:* ${document.getElementById('pessoa').value.toUpperCase()}\n`;
+    msg += `*LEAD:* ${document.getElementById('lead').value.toUpperCase()}\n`;
+    msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
+    msg += `*OT/ANE:* ${document.getElementById('ot_ane').value.toUpperCase()}\n`;
+    msg += `*SGM:* ${document.getElementById('sgm').value.toUpperCase()}\n`;
+    msg += `*BA:* BA${document.getElementById('ba').value.toUpperCase()}\n`;
+    msg += `*SGD:* ${document.getElementById('sgd').value.toUpperCase()}\n`;
+    msg += `*INC:* 00${document.getElementById('inc').value.toUpperCase()}\n`;
+    msg += `*APR:* 00${document.getElementById('apr').value.toUpperCase()}\n`;
+    msg += `*TRAFO:* ${document.getElementById('traf').value.toUpperCase()}\n`;
+    msg += `*ESTRUTURA:* ${document.getElementById('estrut').value.toUpperCase()}\n`;
+    msg += `*ALIM:* ${document.getElementById('alim').value.toUpperCase()}\n`;
+    msg += `*END:* ${document.getElementById('endereco').value.toUpperCase()}\n`;
+    msg += `----------------------------------------------------\n`;
 
-      // Dados dos inputs manuais se estiverem visíveis
-      if (document.getElementById('servico').classList.contains('hidden') === false) {
-        msg += `*SERVICO REALIZADO* \n${document.getElementById('descricaoServico').value.toUpperCase()}\n\n`;
-      }
-      if (document.getElementById('material').classList.contains('hidden') === false) {
-        msg += `*MATERIAL UTILIZADO* \n${document.getElementById('descricaoMaterial').value.toUpperCase()}\n\n`;
-      }
-      if (document.getElementById('sucata').classList.contains('hidden') === false) {
-        msg += `*DEVOLUÇÃO SUCATA GERADA* \n${document.getElementById('descricaoSucata').value.toUpperCase()}\n\n`;
-      }
-      if (document.getElementById('recurso').classList.contains('hidden') === false) {
-        msg += `*NECESSÁRIO OUTRO RECURSO?* \n${document.getElementById('descricaoRecurso').value.toUpperCase()}\n\n`;
-      }
-
-      // Adiciona as notas, se houver
-      let notasMsg = "";
-      if(notas.servico) { notasMsg += "Serviço não realizado pelo seguinte motivo: " + notas.servico + "\n"; }
-      if(notas.material) { notasMsg += "Material não utilizado pelo seguinte motivo: " + notas.material + "\n"; }
-      if(notas.sucata) { notasMsg += "Devolução sucata não foi Gerada pelo seguinte motivo: " + notas.sucata + "\n"; }
-      if(notas.recurso) { notasMsg += "Não é necessário outro Recurso pelo seguinte motivo: " + notas.recurso + "\n"; }
-      if(notasMsg) { 
-        msg += "\nNOTAS:\n" + notasMsg; 
-      }
-
-      // Adiciona, por último, o tempo da sessão e a data completa
-      let sessionTime = "";
-      if (globalTimerStart) {
-        let sessionSeconds = Math.floor((Date.now() - globalTimerStart) / 1000);
-        sessionTime = "*TEMPO DA SESSÃO:* " + formatTime(sessionSeconds) + "\n";
-      }
-      let now = new Date();
-      let fullDate = formatFullDateTime(now);
-      let formattedFullDate = fullDate.charAt(0).toUpperCase() + fullDate.slice(1).toLowerCase();
-
-      msg += "\n" + sessionTime + formattedFullDate;
-      document.getElementById('previewBox').textContent = msg;
+    if (!document.getElementById('servico').classList.contains('hidden')) {
+      msg += `*SERVICO REALIZADO*\n${document.getElementById('descricaoServico').value.toUpperCase()}\n\n`;
     }
+    if (!document.getElementById('material').classList.contains('hidden')) {
+      msg += `*MATERIAL UTILIZADO*\n${document.getElementById('descricaoMaterial').value.toUpperCase()}\n\n`;
+    }
+    if (!document.getElementById('sucata').classList.contains('hidden')) {
+      msg += `*DEVOLUÇÃO SUCATA GERADA*\n${document.getElementById('descricaoSucata').value.toUpperCase()}\n\n`;
+    }
+    if (!document.getElementById('recurso').classList.contains('hidden')) {
+      msg += `*NECESSÁRIO OUTRO RECURSO?*\n${document.getElementById('descricaoRecurso').value.toUpperCase()}\n\n`;
+    }
+
+    let notasMsg = "";
+    if (notas.servico) notasMsg += "Serviço não realizado pelo seguinte motivo: " + notas.servico + "\n";
+    if (notas.material) notasMsg += "Material não utilizado pelo seguinte motivo: " + notas.material + "\n";
+    if (notas.sucata) notasMsg += "Devolução sucata não foi gerada pelo seguinte motivo: " + notas.sucata + "\n";
+    if (notas.recurso) notasMsg += "Não é necessário outro recurso pelo seguinte motivo: " + notas.recurso + "\n";
+
+    if (notasMsg) {
+      msg += `NOTAS:\n${notasMsg}\n`;
+    }
+
+    let sessionTime = "";
+    if (globalTimerStart) {
+      let sessionSeconds = Math.floor((Date.now() - globalTimerStart) / 1000);
+      sessionTime = "*TEMPO DA SESSÃO:* " + formatTime(sessionSeconds) + "\n";
+    }
+
+    let now = new Date();
+    let fullDate = formatFullDateTime(now);
+    msg += `${sessionTime}${fullDate}`;
+
+    document.getElementById('previewBox').textContent = msg;
+  }
+
+
+    function verificarCamposRespondidos() {
+      let missing = [];
+      let pessoa = document.getElementById('pessoa').value;
+      let lead = document.getElementById('lead').value;
+      let data = document.getElementById('data').value;
+
+      if (!data || data.trim() === "") { missing.push("📅 Data"); }
+      if (!pessoa || pessoa === "NENHUM") { missing.push("👤 Nome do Componente"); }
+      if (!lead || lead === "NENHUM") { missing.push("🏷️ LEAD"); }
+
+      for (let key in fieldsAnswered) {
+        if (!fieldsAnswered[key]) {
+          if (key === "servico") { missing.push("🔧 Serviço Realizado"); }
+          else if (key === "material") { missing.push("🛠️ Material Utilizado"); }
+          else if (key === "sucata") { missing.push("♻️ Devolução Sucata Gerada"); }
+          else if (key === "recurso") { missing.push("❗ Necessário Outro Recurso"); }
+        }
+      }
+      if (missing.length > 0) {
+        let msg = "Por favor, preencha os seguintes campos obrigatórios:<br>" + missing.join("<br>");
+        let popup = document.getElementById('obrigatorio-popup');
+        popup.innerHTML = `<p>${msg}</p>
+          <div class="popup-buttons">
+            <button onclick="document.getElementById('obrigatorio-popup').style.display='none';">Fechar</button>
+          </div>`;
+        popup.style.display = 'block';
+        return false;
+      }
+      return true;
+    }
+
     function copiarMensagem() {
+      if (!verificarCamposRespondidos()) return;
       let mensagem = document.getElementById('previewBox').textContent;
       navigator.clipboard.writeText(mensagem).then(function() {
         document.getElementById('popup').style.display = 'block';
-        setTimeout(() => document.getElementById('popup').style.display = 'none', 2000);
+        setTimeout(() => { document.getElementById('popup').style.display = 'none'; }, 3000);
       });
     }
+          function enviarWhatsApp() {
+        if (!verificarCamposRespondidos()) return;
+
+        if (!pdfSaved) {
+          let confirmPopup = document.getElementById('pdf-warning-popup');
+          confirmPopup.innerHTML = `
+            <p>PDF ainda não foi salvo! Deseja encaminhar mesmo assim?</p>
+            <div class="popup-buttons">
+              <button onclick="continuarWhatsApp()">Sim</button>
+              <button onclick="cancelarWhatsApp()">Não</button>
+            </div>`;
+          confirmPopup.style.display = 'block';
+          showOverlay();
+        } else {
+          continuarWhatsApp();
+        }
+      }
+
+      function continuarWhatsApp() {
+        document.getElementById('pdf-warning-popup').style.display = 'none';
+        hideOverlay();
+
+        const mensagem = encodeURIComponent(document.getElementById('previewBox').textContent);
+        const url = `https://wa.me/?text=${mensagem}`;
+        window.open(url, '_blank');
+      }
+
+      function cancelarWhatsApp() {
+        document.getElementById('pdf-warning-popup').style.display = 'none';
+        hideOverlay();
+      }
     function limparMensagem() {
       document.getElementById('previewBox').textContent = '';
     }
-    function enviarWhatsApp() {
-      const mensagem = encodeURIComponent(document.getElementById('previewBox').textContent.toUpperCase());
-      const url = `https://wa.me/?text=${mensagem}`;
-      window.open(url, '_blank');
-      // Se o PDF não foi salvo, exibe um lembrete
-      if (!pdfSaved) {
-        let reminder = document.getElementById('pdf-reminder-popup');
-        reminder.classList.add('shake');
-        reminder.style.display = 'block';
-        setTimeout(() => {
-          reminder.style.display = 'none';
-          reminder.classList.remove('shake');
-        }, 3000);
-      }
-    }
     function savePdf() {
-  gerarMensagem();
-  var container = document.querySelector('.container');
-  var width = container.offsetWidth;
-  var height = container.offsetHeight;
-  
-  // Recupera e prepara os valores para o nome do arquivo
-  let lead = document.getElementById('lead').value.trim();
-  let data = document.getElementById('data').value.trim();
-  let ot_ane = document.getElementById('ot_ane').value.trim();
-  let inc = document.getElementById('inc').value.trim();
-  let endereco = document.getElementById('endereco').value.trim();
-  
-  // Converte a data para o formato brasileiro dd_mm_yyyy
-  if (data !== "") {
-    let parts = data.split("-");
-    data = parts[2] + "_" + parts[1] + "_" + parts[0];
-  }
-  
-  // Substitui os espaços por underlines
-  lead = lead.replace(/\s+/g, "_");
-  ot_ane = ot_ane.replace(/\s+/g, "_");
-  inc = inc.replace(/\s+/g, "_");
-  endereco = endereco.replace(/\s+/g, "_");
-  
-  // Monta o nome do arquivo dinamicamente
-  let fileName = "Retorno_Campo executado_";
-  if (lead !== "") { fileName += lead; }
-  if (data !== "") { fileName += "_em_" + data; }
-  // Usa ot_ane se estiver preenchido, senão usa inc (se preenchido)
-  if (ot_ane !== "") { fileName += "_Atraves OT-ANE_" + ot_ane; }
-  else if (inc !== "") { fileName += "_Atraves Incidência_" + inc; }
-  if (endereco !== "") { fileName += "_No endereco_" + endereco; }
-  fileName += ".pdf";
-  
-  // Converte o nome do arquivo para maiúsculas
-  fileName = fileName.toUpperCase();
-  
-  html2pdf().set({
-    margin: 0,
-    filename: fileName,
-    image: { type: 'jpeg', quality: 0.99 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'px', format: [width, height], orientation: 'portrait' }
-  }).from(container).save().then(() => {
-    const pdfButton = document.getElementById('pdfButton');
-    pdfButton.textContent = 'PDF JÁ SALVO';
-    pdfButton.style.backgroundColor = '#4CAF50';
-    pdfButton.style.color = '#fff';
-    pdfButton.style.border = '1px solid #4CAF50';
-    pdfButton.disabled = true;
-    pdfSaved = true;
-  });
-}
-    /* Função para exibir o overlay e o popup de bloqueio */
+      gerarMensagem();
+      let container = document.querySelector('.container');
+      let width = container.offsetWidth;
+      let height = container.offsetHeight;
+      
+      let lead = document.getElementById('lead').value.trim();
+      let data = document.getElementById('data').value.trim();
+      let ot_ane = document.getElementById('ot_ane').value.trim();
+      let inc = document.getElementById('inc').value.trim();
+      let endereco = document.getElementById('endereco').value.trim();
+      
+      if (data !== "") {
+        let parts = data.split("-");
+        data = parts[2] + "_" + parts[1] + "_" + parts[0];
+      }
+      
+      lead = lead.replace(/\s+/g, "_");
+      ot_ane = ot_ane.replace(/\s+/g, "_");
+      inc = inc.replace(/\s+/g, "_");
+      endereco = endereco.replace(/\s+/g, "_");
+      
+      let fileName = "RETORNO_CAMPO EXECUTADO_";
+      if (lead !== "") { fileName += lead; }
+      if (data !== "") { fileName += "_EM_" + data; }
+      if (ot_ane !== "") { fileName += "_ATRAVÉS_OT-ANE_" + ot_ane; }
+      else if (inc !== "") { fileName += "_ATRAVÉS_INCIDÊNCIA_" + inc; }
+      if (endereco !== "") { fileName += "_NO_ENDERECO_" + endereco; }
+      fileName += ".PDF";
+      
+      fileName = fileName.toUpperCase();
+      
+      html2pdf().set({
+        margin: 0,
+        filename: fileName,
+        image: { type: 'jpeg', quality: 0.99 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'px', format: [width, height], orientation: 'portrait' }
+      }).from(container).save().then(() => {
+        let pdfButton = document.getElementById('pdfButton');
+        pdfButton.textContent = 'PDF JÁ SALVO';
+        pdfButton.style.backgroundColor = '#4CAF50';
+        pdfButton.style.color = '#fff';
+        pdfButton.style.border = '1px solid #4CAF50';
+        pdfButton.disabled = true;
+        pdfSaved = true;
+      });
+    }
+
     document.getElementById('clickOverlay').addEventListener('click', function(e) {
       document.getElementById('body-popup').style.display = 'block';
       e.stopPropagation();
     });
+
     function closeUpdatePopup() {
       document.getElementById('update-popup').style.display = 'none';
       document.getElementById('welcome-popup').style.display = 'block';
+      hideOverlay();
     }
-    /* --- Popup com opções para cada "Não" com confirmação padrão --- */
+
+    /* Popup com opções para cada "Não" */
     function showOptionsPopup(field) {
       currentOptionField = field;
-      const popup = document.getElementById('options-popup');
+      let popup = document.getElementById('options-popup');
       let options = optionsForField[field] || [];
       let customMessage = messagesForField[field] || `Selecione o motivo para não realizar execução do "${field.toUpperCase()}"`;
       let html = `<p>${customMessage}</p><div class="popup-buttons">`;
@@ -749,46 +962,59 @@
       html += `</div>`;
       popup.innerHTML = html;
       popup.style.display = 'block';
+      showOverlay();
     }
+
     function confirmOption(field, option, btn) {
       currentOptionButton = btn;
       btn.style.backgroundColor = "#4CAF50";
       setTimeout(() => {
         let confirmPopup = document.getElementById('confirm-popup');
+        confirmPopup.className = "popup-confirm";
         confirmPopup.innerHTML = `<p>Tem certeza que deseja inserir a opção marcada?</p>
           <div class="popup-buttons">
-            <button onclick="finalSelectOption('${field}', '${option}')">Sim</button>
-            <button onclick="cancelConfirm()">Não</button>
+            <button class="btn-sim" onclick="finalSelectOption('${field}', '${option}')">Sim</button>
+            <button class="btn-nao" onclick="cancelConfirm()">Não</button>
           </div>`;
         confirmPopup.style.display = 'block';
       }, 100);
     }
+
     function finalSelectOption(field, option) {
       document.getElementById('confirm-popup').style.display = 'none';
       selectOption(field, option);
+      hideOverlay();
     }
+
     function cancelConfirm() {
       document.getElementById('confirm-popup').style.display = 'none';
-      if(currentOptionButton) { currentOptionButton.style.backgroundColor = ""; }
+      if (currentOptionButton) { 
+        currentOptionButton.style.backgroundColor = "";
+      }
+      // O overlay continua ativo pois o popup de opções ainda está aberto
     }
+
     function selectOption(field, optionText) {
       notas[field] = optionText;
+      fieldsAnswered[field] = true;
       document.getElementById('options-popup').style.display = 'none';
       gerarMensagem();
     }
-    /* --- Atualização automática do preview --- */
+
     document.addEventListener('DOMContentLoaded', () => {
-      const elementos = document.querySelectorAll('#formFields input, #formFields select, #formFields textarea');
+      let elementos = document.querySelectorAll('#formFields input, #formFields select, #formFields textarea');
       elementos.forEach(elem => {
         elem.addEventListener('input', () => { lastInteraction = Date.now(); gerarMensagem(); });
         elem.addEventListener('change', () => { lastInteraction = Date.now(); gerarMensagem(); });
       });
     });
+
     function scheduleAutoPreviewUpdate() {
       let diff = Date.now() - lastInteraction;
       let interval = (diff < 2 * 60 * 1000) ? 2 * 60 * 1000 : 3 * 60 * 1000;
       setTimeout(() => { gerarMensagem(); scheduleAutoPreviewUpdate(); }, interval);
     }
+
     window.onload = function() {
       disableFields();
       document.getElementById('update-popup').style.display = 'block';
