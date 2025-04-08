@@ -166,17 +166,18 @@
       text-align: left;
     }
     .popup-buttons {
-      display: flex; 
-      justify-content: space-around; 
-      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;        /* permite quebra automática */
+      justify-content: center; /* centraliza os botões */
+      gap: 5px;               /* espaçamento entre botões */
     }
     .popup-buttons button {
-      white-space: normal; /* permite que o texto quebre linhas */
-      word-wrap: break-word; /* quebra palavras compridas */
-      font-size: 12px; /* tamanho da fonte menor */
-      padding: 6px 10px; /* ajuste do padding para melhor encaixe */
-      margin: 4px; /* espaçamento entre botões */
-      flex: 1 1 45%; /* define largura flexível dos botões */
+      flex: 1 1 auto;         /* largura automática dos botões */
+      white-space: normal;    /* permite quebra de linha no texto */
+      word-wrap: break-word;  /* quebra palavras longas */
+      font-size: 12px;        /* tamanho da fonte reduzido */
+      padding: 6px 10px;      /* padding interno dos botões */
+      min-width: 120px;       /* largura mínima para melhor visualização */
     }
     /* Popup de confirmação - fundo branco, texto em vermelho */
     .popup-confirm {
