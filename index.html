@@ -171,13 +171,12 @@
       margin-top: 10px;
     }
     .popup-buttons button {
-      padding: 8px 16px;
-      font-size: 14px;
-      border-radius: 8px;
-      margin: 4px;
-      border: 1px solid #fff;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
+      white-space: normal; /* permite que o texto quebre linhas */
+      word-wrap: break-word; /* quebra palavras compridas */
+      font-size: 12px; /* tamanho da fonte menor */
+      padding: 6px 10px; /* ajuste do padding para melhor encaixe */
+      margin: 4px; /* espaçamento entre botões */
+      flex: 1 1 45%; /* define largura flexível dos botões */
     }
     /* Popup de confirmação - fundo branco, texto em vermelho */
     .popup-confirm {
