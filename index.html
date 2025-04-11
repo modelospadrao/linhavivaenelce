@@ -558,8 +558,11 @@
       <input type="tel" id="dt" value="DT" maxlength="10" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS"
        onkeydown="enforcePrefix(event, 'DT')" oninput="fixPrefixInput(this, 'DT')">
       
-      <label>APR:</label>
+      <label>APR DIGITAL:</label>
       <input type="tel" id="apr" maxlength="7" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 7 DÍGITOS">
+      
+      <label>APR MANUAL (PAPEL):</label>
+      <input type="tel" id="apr2" maxlength="11" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 11 DÍGITOS">
       
       <!-- Campo 5RO: dois botões e uma caixa de input readonly que será preenchida automaticamente -->
       <label>5RO:</label>
@@ -898,7 +901,8 @@
       msg += `*SGD:* ${document.getElementById('sgd').value.toUpperCase()}\n`;
       msg += `*INC:* 00${document.getElementById('inc').value.toUpperCase()}\n`;
       msg += `*DT:* ${document.getElementById('dt').value.toUpperCase()}\n`;
-      msg += `*APR:* ${document.getElementById('apr').value.toUpperCase()}\n`;
+      msg += `*APR DIGITAL:* ${document.getElementById('apr').value.toUpperCase()}\n`;
+      msg += `*APR MANUAL:* ${document.getElementById('apr2').value.toUpperCase()}\n`;
       msg += `*5RO:* ${cincoROValue.toUpperCase()}\n`;
       msg += `*TRAFO:* ${document.getElementById('traf').value.toUpperCase()}\n`;
       msg += `*TOMBAMENTO:* ${document.getElementById('Tomb').value.toUpperCase()}\n`;
