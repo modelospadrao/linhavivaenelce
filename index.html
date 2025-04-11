@@ -554,11 +554,23 @@
       <div class="input-container">
         <div class="time-input-group">
           <label for="start-time">Horário de Início:</label>
-          <input type="text" id="start-time" maxlength="5" placeholder="HH:mm" oninput="insertColon(this)">
+          <input 
+            type="tel" 
+            inputmode="numeric" 
+            id="start-time" 
+            maxlength="5" 
+            placeholder="HH:mm" 
+            oninput="insertColon(this)">
         </div>
         <div class="time-input-group">
           <label for="end-time">Horário Final:</label>
-          <input type="text" id="end-time" maxlength="5" placeholder="HH:mm" oninput="insertColon(this)">
+          <input 
+            type="tel" 
+            inputmode="numeric" 
+            id="end-time" 
+            maxlength="5" 
+            placeholder="HH:mm" 
+            oninput="insertColon(this)">
         </div>
       </div>
       <h2 style="color: #e63946; font-size: 26px; text-align: center; margin: 20px 0; border-bottom: 5px solid #e63946;">
