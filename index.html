@@ -481,49 +481,58 @@
         <option value="DFJ-LR-03B">DFJ-LR-03B</option>
       </select>
       
-          <div class="input-container">
-      <div class="input-group">
-        <label for="br1">BR LÍDER:</label>
-        <input type="tel" id="br1" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
-      <div class="input-group">
-        <label for="br2">BR:</label>
-        <input type="tel" id="br2" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
+     <div class="input-container">
+    <div class="input-group">
+      <label for="br1">BR LÍDER:</label>
+      <input type="tel" id="br1" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
     </div>
+    <div class="input-group">
+      <label for="br2">BR:</label>
+      <input type="tel" id="br2" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
+    </div>
+  </div>
 
-    <div class="input-container">
-      <div class="input-group">
-        <label for="br3">BR:</label>
-        <input type="tel" id="br3" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
-      <div class="input-group">
-        <label for="br4">BR:</label>
-        <input type="tel" id="br4" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
+  <div class="input-container">
+    <div class="input-group">
+      <label for="br3">BR:</label>
+      <input type="tel" id="br3" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
     </div>
+    <div class="input-group">
+      <label for="br4">BR:</label>
+      <input type="tel" id="br4" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
+    </div>
+  </div>
 
-    <div class="input-container">
-      <div class="input-group">
-        <label for="br5">BR:</label>
-        <input type="tel" id="br5" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
-      <div class="input-group">
-        <label for="br6">BR:</label>
-        <input type="tel" id="br6" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
+  <div class="input-container">
+    <div class="input-group">
+      <label for="br5">BR:</label>
+      <input type="tel" id="br5" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
     </div>
+    <div class="input-group">
+      <label for="br6">BR:</label>
+      <input type="tel" id="br6" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
+    </div>
+  </div>
 
-    <div class="input-container">
-      <div class="input-group">
-        <label for="br7">BR:</label>
-        <input type="tel" id="br7" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
-      <div class="input-group">
-        <label for="br8">BR:</label>
-        <input type="tel" id="br8" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-      </div>
+  <div class="input-container">
+    <div class="input-group">
+      <label for="br7">BR:</label>
+      <input type="tel" id="br7" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
     </div>
+    <div class="input-group">
+      <label for="br8">BR:</label>
+      <input type="tel" id="br8" value="BR" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS"
+             onkeydown="enforcePrefix(event, 'BR')" oninput="fixPrefixInput(this, 'BR')">
+    </div>
+  </div>
+
       
       <label>OT/ANE:</label>
       <input type="tel" id="ot_ane" maxlength="7" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS">
@@ -535,7 +544,9 @@
       <input type="date" id="data" required>
       
       <label>BA:</label>
-      <input type="tel" id="ba" value="BA" maxlength="10" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS">
+      <input type="tel" id="ba" value="BA" maxlength="10" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS"
+       onkeydown="enforcePrefix(event, 'BA')" oninput="fixPrefixInput(this, 'BA')">
+
       
       <label>SGD:</label>
       <input type="tel" id="sgd" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS">
@@ -544,7 +555,9 @@
       <input type="tel" id="inc" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS">
       
       <label>DT:</label>
-      <input type="tel" id="dt" value="DT" maxlength="10" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS">
+      <input type="tel" id="dt" value="DT" maxlength="10" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS"
+       onkeydown="enforcePrefix(event, 'DT')" oninput="fixPrefixInput(this, 'DT')">
+
       
       <label>APR:</label>
       <input type="tel" id="apr" maxlength="7" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 7 DÍGITOS">
@@ -1176,6 +1189,36 @@
       document.getElementById('update-popup').style.display = 'block';
       lastInteraction = Date.now();
       scheduleAutoPreviewUpdate();
+    }
+    
+       // Impede que, se o cursor estiver na área do prefixo, teclas que alterem esse trecho sejam processadas
+      function enforcePrefix(e, prefix) {
+      const input = e.target;
+      const selectionStart = input.selectionStart;
+      const selectionEnd = input.selectionEnd;
+
+      // Se pressionar Backspace e o cursor estiver no início ou próximo do prefixo, impede a ação
+      if (e.key === 'Backspace' && selectionStart <= prefix.length) {
+        e.preventDefault();
+        return;
+      }
+      // Se pressionar Delete e a seleção iniciar antes do fim do prefixo, impede a ação
+      if (e.key === 'Delete' && selectionStart < prefix.length) {
+        e.preventDefault();
+        return;
+      }
+      // Se houver uma seleção que inclui algum caractere do prefixo, impede a ação
+      if (selectionStart < prefix.length) {
+        e.preventDefault();
+        return;
+      }
+    }
+
+    function fixPrefixInput(el, prefix) {
+      // Se o campo não começar com o prefixo, reinsere-o
+      if (!el.value.startsWith(prefix)) {
+        el.value = prefix + el.value.replace(new RegExp('^' + prefix), '');
+      }
     }
   </script>
 </body>
