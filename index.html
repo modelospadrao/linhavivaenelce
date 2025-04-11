@@ -302,24 +302,31 @@
       z-index: 1500;
       text-align: center;
     }
-    .input-container {
+        .input-container {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;                /* Permite quebra de linha */
       gap: 23px;
-      flex-wrap: nowrap;
+      justify-content: flex-start;    /* Alinha os itens à esquerda */
     }
+
+    .input-group {
+      /* Define cada grupo para ocupar 50% da linha, descontando metade do gap */
+      flex: 0 0 calc(50% - 11.5px);
+    }
+
     .input-container label {
       display: block;
       width: 100%;
       margin-bottom: -1px;
       text-align: left;
     }
+
     .input-container input {
-      width: 150px;
-      padding: 8px;
+      width: 100%;
+      padding: 4px;
       font-size: 14px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 3px;
       text-align: left;
     }
   </style>
@@ -400,7 +407,7 @@
     <h2 style="text-align: center; font-size: 25px; font-weight: bold; color: #e63946;">
       MODELO RETORNO DE CAMPO<br>LINHA VIVA PREVETIVA/CORRETIVA
     </h2>
-    <h2 style="text-align: center; font-size: 21px; font-weight: bold; color: #000;">(Versão 4.0)</h2>
+    <h2 style="text-align: center; font-size: 21px; font-weight: bold; color: #000;">(Versão 3.0)</h2>
     
     <!-- Início do Formulário -->
     <div id="formFields">
@@ -474,34 +481,49 @@
         <option value="DFJ-LR-03B">DFJ-LR-03B</option>
       </select>
       
-      <div class="input-container">
-        <div class="input-group">
-          <label for="br1">BR LÍDER:</label>
-          <input type="tel" id="br1" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-        <div class="input-group">
-          <label for="br2">BR:</label>
-          <input type="tel" id="br2" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-        <div class="input-group">
-          <label for="br3">BR:</label>
-          <input type="tel" id="br3" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-       </div>
-      <div class="input-container">
-        <div class="input-group">
-          <label for="br5">BR:</label>
-          <input type="tel" id="br5" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-        <div class="input-group">
-          <label for="br6">BR:</label>
-          <input type="tel" id="br6" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-        <div class="input-group">
-          <label for="br7">BR:</label>
-          <input type="tel" id="br7" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-       </div>
+          <div class="input-container">
+      <div class="input-group">
+        <label for="br1">BR LÍDER:</label>
+        <input type="tel" id="br1" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+      <div class="input-group">
+        <label for="br2">BR:</label>
+        <input type="tel" id="br2" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+    </div>
+
+    <div class="input-container">
+      <div class="input-group">
+        <label for="br3">BR:</label>
+        <input type="tel" id="br3" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+      <div class="input-group">
+        <label for="br4">BR:</label>
+        <input type="tel" id="br4" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+    </div>
+
+    <div class="input-container">
+      <div class="input-group">
+        <label for="br5">BR:</label>
+        <input type="tel" id="br5" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+      <div class="input-group">
+        <label for="br6">BR:</label>
+        <input type="tel" id="br6" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+    </div>
+
+    <div class="input-container">
+      <div class="input-group">
+        <label for="br7">BR:</label>
+        <input type="tel" id="br7" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+      <div class="input-group">
+        <label for="br8">BR:</label>
+        <input type="tel" id="br8" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
+      </div>
+    </div>
       
       <label>OT/ANE:</label>
       <input type="tel" id="ot_ane" maxlength="7" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS">
@@ -847,9 +869,11 @@
       msg += `*BR LÍDER:* ${document.getElementById('br1').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br2').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br3').value.toUpperCase()}\n`;
+      msg += `*BR:* ${document.getElementById('br4').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br5').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br6').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br7').value.toUpperCase()}\n`;
+      msg += `*BR:* ${document.getElementById('br8').value.toUpperCase()}\n`;
       msg += `*OT/ANE:* ${document.getElementById('ot_ane').value.toUpperCase()}\n`;
       msg += `*SGM:* ${document.getElementById('sgm').value.toUpperCase()}\n`;
       msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
@@ -909,12 +933,12 @@
       if (respRecurso === "SIM") {
         let desc = document.getElementById('descricaoRecurso').value;
         if(desc.trim() !== "") {
-          msg += `*NECESSÁRIO ENVIO DE OUTRA EQUIPE?*\n${desc.toUpperCase()}\n\n`;
+          msg += `*NECESSÁRIO OUTRO RECURSO?*\n${desc.toUpperCase()}\n\n`;
         }
       } else if (respRecurso === "NÃO") {
         let note = document.getElementById('descricaoRecurso').value;
         if(note.trim() !== "") {
-          msg += `*NECESSÁRIO ENVIO DE OUTRA EQUIPE MOTIVO:*\n${note.toUpperCase()}\n\n`;
+          msg += `*NECESSÁRIO OUTRO RECURSO MOTIVO:*\n${note.toUpperCase()}\n\n`;
         }
       }
       
