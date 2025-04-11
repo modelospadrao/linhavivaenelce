@@ -315,8 +315,8 @@
       text-align: left;
     }
     .input-container input {
-      width: 103px;
-      padding: 4px;
+      width: 150px;
+      padding: 8px;
       font-size: 14px;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -487,11 +487,7 @@
           <label for="br3">BR:</label>
           <input type="tel" id="br3" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
         </div>
-        <div class="input-group">
-          <label for="br4">BR:</label>
-          <input type="tel" id="br4" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-      </div>
+       </div>
       <div class="input-container">
         <div class="input-group">
           <label for="br5">BR:</label>
@@ -505,11 +501,7 @@
           <label for="br7">BR:</label>
           <input type="tel" id="br7" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
         </div>
-        <div class="input-group">
-          <label for="br8">BR:</label>
-          <input type="tel" id="br8" maxlength="12" pattern="\d*" inputmode="numeric" placeholder="12 DÍGITOS">
-        </div>
-      </div>
+       </div>
       
       <label>OT/ANE:</label>
       <input type="tel" id="ot_ane" maxlength="7" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS">
@@ -855,11 +847,9 @@
       msg += `*BR LÍDER:* ${document.getElementById('br1').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br2').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br3').value.toUpperCase()}\n`;
-      msg += `*BR:* ${document.getElementById('br4').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br5').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br6').value.toUpperCase()}\n`;
       msg += `*BR:* ${document.getElementById('br7').value.toUpperCase()}\n`;
-      msg += `*BR:* ${document.getElementById('br8').value.toUpperCase()}\n`;
       msg += `*OT/ANE:* ${document.getElementById('ot_ane').value.toUpperCase()}\n`;
       msg += `*SGM:* ${document.getElementById('sgm').value.toUpperCase()}\n`;
       msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
