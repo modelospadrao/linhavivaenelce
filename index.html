@@ -570,13 +570,20 @@
       </div>
       
       <label>TRAFO:</label>
-      <input type="text" id="traf" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 10 DÍGITOS">
-      
+      <input type="text" id="traf" maxlength="10" 
+             pattern="^[A-Za-z0-9]{1,10}$" 
+             placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS">
+
       <label>TOMBAMENTO:</label>
-      <input type="tel" id="Tomb" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS">
-      
+      <input type="tel" id="Tomb" maxlength="10" 
+             pattern="^\d{1,10}$" 
+             inputmode="numeric" 
+             placeholder="INSIRA APENAS NÚMEROS, MÁXIMO 10 DÍGITOS">
+
       <label>ESTRUTURA:</label>
-      <input type="text" id="estrut" maxlength="10" pattern="[A-Za-z0-9]{6}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 10 DÍGITOS">
+      <input type="text" id="estrut" maxlength="10" 
+             pattern="^[A-Za-z0-9]{1,10}$" 
+             placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS">
       
       <label>ALIM:</label>
       <input type="text" id="alim" maxlength="7" pattern="[A-Za-z0-9]{7}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 7 DÍGITOS">
