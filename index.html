@@ -1,0 +1,679 @@
+<!doctypehtml><html lang=pt><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>MODELO RETORNO DE CAMPO PODA - Com Equipes</title><link href=pesada.png rel=icon type=image/png><script src=https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js></script><style>body{font-family:Cambria,Cochin,Georgia,Times,sans-serif;overscroll-behavior-y:none}.container{width:90%;margin:auto}textarea{width:100%;height:469px}.hidden{display:none}.preview-text,.supervisor-box,input[type=date],input[type=number],input[type=text]{width:100%;padding:9px;margin:6px 0;font-size:14px;border:1px solid #ddd;text-transform:uppercase;background-color:#f0f0f0}input,input[type=tel],select{width:100%;padding:9px;margin:6px 0;font-size:14px;border:1px solid #ddd;text-transform:uppercase;background-color:#f0f0f0}.button-default{border:1px solid #000;padding:8px 16px;margin:5px;background-color:#fff;cursor:pointer;font-size:14px;border-radius:4px;transition:all .3s ease;box-shadow:0 0 5px rgba(0,0,0,.1)}.button-default.selected{background-color:#000;color:#fff;border:1px solid #000}.button-default:hover{box-shadow:0 0 10px rgba(0,0,0,.2)}.button-gerarMensagem{background-color:#616964;color:#fff;padding:8px 16px;margin:5px;cursor:pointer;font-size:14px;border-radius:4px;transition:all .3s ease;box-shadow:0 0 5px rgba(0,0,0,.1)}.button-enviarWhatsApp{background-color:#00b145;color:#fff;padding:8px 16px;margin:5px;cursor:pointer;font-size:14px;border-radius:4px;transition:all .3s ease;box-shadow:0 0 5px rgba(0,0,0,.1)}.clear-button{background-color:#f44336;color:#fff;padding:8px 16px;margin:5px;cursor:pointer;font-size:14px;border-radius:4px;transition:all .3s ease;box-shadow:0 0 5px rgba(0,0,0,.1)}.preview-box{border:1px solid #ddd;padding:10px;margin-top:20px;background-color:#f0f0f0;white-space:pre-wrap;font-family:monospace;font-size:14px}.button-yes{background-color:#4caf50;color:#fff;border:1px solid #4caf50;padding:8px 16px;font-size:14px;border-radius:4px;cursor:pointer;margin:0 5px}.button-yes.selected{background-color:#000;color:#fff;border:1px solid #000}.button-no{background-color:red;color:#fff;padding:8px 16px;font-size:14px;border-radius:4px;cursor:pointer;margin:0 5px}.button-no.selected{background-color:#000;color:#fff;border:1px solid #000}#global-clock{position:fixed;top:10px;left:10px;font-size:24px;font-family:'Courier New',Courier,monos-serif;color:#fff;background-color:#000;padding:10px;border-radius:8px;z-index:1001;display:none}.popup{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;background-color:rgba(0,0,0,.8);color:#fff;font-size:16px;border-radius:5px;z-index:1100;box-shadow:0 0 10px rgba(0,0,0,.5);text-align:left}.popup-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:5px}.popup-buttons button{flex:1 1 auto;white-space:normal;word-wrap:break-word;font-size:12px;padding:6px 10px;min-width:120px;border-radius:4px}.popup-confirm{background-color:#fff;color:red;font-size:16px;border-radius:8px;padding:20px;box-shadow:0 0 10px rgba(0,0,0,.1);text-align:center;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1200;display:none}.popup-confirm .btn-sim{background-color:green;color:#fff;padding:8px 16px;font-size:14px;border:none;border-radius:8px;margin:4px;cursor:pointer;transition:background-color .2s ease}.popup-confirm .btn-nao{background-color:red;color:#fff;padding:8px 16px;font-size:14px;border:none;border-radius:8px;margin:4px;cursor:pointer;transition:background-color .2s ease}#popupOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:0 0;z-index:500;display:none}#clickOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:transparent;z-index:2000;display:none}#body-popup{display:none;position:fixed;top:20px;left:50%;transform:translateX(-50%);background-color:rgba(0,0,0,.85);color:#fff;padding:15px 20px;border-radius:8px;z-index:2500;font-size:18px;cursor:pointer}#reset-button{border:1px solid #000;padding:8px 16px;background-color:#000;color:#fff;cursor:pointer;font-size:20px;border-radius:32px;margin:10px;display:block;width:fit-content;margin-left:auto;margin-right:auto;position:relative;z-index:3000}#pdf-warning-popup{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;background-color:#fcc;color:#000;font-size:16px;border:2px solid red;border-radius:8px;z-index:2001;text-align:center;pointer-events:auto}#pdf-reminder-popup{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:15px;background-color:#fcc;color:#000;font-size:16px;border:2px solid red;border-radius:8px;z-index:1500;text-align:center}.input-container{display:flex;flex-wrap:nowrap;gap:23px;justify-content:flex-start}.input-group{flex:0 0 calc(50% - 11.5px)}.input-container label{display:block;width:100%;margin-bottom:-1px;text-align:left}.input-container input{width:95%;padding:4px;font-size:14px;border:1px solid #ccc;border-radius:3px;text-align:left}</style><div id=popupOverlay></div><div id=clickOverlay></div><div id=global-clock></div><div class=popup id=update-popup style=font-size:15px><p>⚠️ NOTAS DE ATUALIZAÇÃO!!!<br><br>1️⃣ O campo "Pré-Visualização da Mensagem" agora é preenchido automaticamente sempre que um valor é alterado.<br>2️⃣ Foram adicionadas mensagens pré‑formatadas quando marcada a opção ("NÃO").<br>3️⃣ Incluídos alertas para lembrar de salvar o arquivo em PDF.<br>4️⃣ Agora, o sistema renomeia automaticamente o arquivo PDF para facilitar sua localização, com base no retorno do preenchimento diário.<br>5️⃣ Alguns campos foram atualizados, exigindo o preenchimento obrigatório!<br>6️⃣ Foram adicionadas novas opções no questionário.<br>7️⃣ Foram inseridos campos para o horário de início e fim da atividade.<br>8️⃣ Foi ajustada a condição para salvar primeiro o PDF e, em seguida, encaminhar a mensagem de pré‑visualização.<br><br><button onclick=closeUpdatePopup(),hideOverlay() style="font-size:15px;padding:7px 125px;border-radius:14px;background-color:#fff;color:#000;border:none;cursor:pointer;display:block;margin:0 auto">Fechar</button></div><div class=popup id=welcome-popup><p>Bem-vindo! Deseja iniciar?<div class=popup-buttons><button onclick=startSprint() class=button-yes>Sim</button> <button onclick=handleNoSprint() class=button-no>Não</button></div></div><div class=popup id=yes-notification-popup><p>Os campos estão liberados para edição. O contador de tempo foi ativado.</div><div class=popup id=no-notification-popup><p>Edição cancelada!</div><div class=popup id=gerar-popup><p>Mensagem Gerada!</p><button onclick='document.getElementById("gerar-popup").style.display="none",hideOverlay()'>Fechar</button></div><div class=popup id=limpar-popup><p>Mensagem limpa com sucesso!</p><button onclick='document.getElementById("limpar-popup").style.display="none",hideOverlay()'>Fechar</button></div><div class=popup id=encaminhar-popup><p>Mensagem encaminhada com sucesso!<br>No final do dia o responsável deverá incrementar no formulário essas evidências!</p><button onclick='document.getElementById("encaminhar-popup").style.display="none",hideOverlay()'>Fechar</button></div><div class=popup id=popup>Mensagem Copiada!</div><div class=popup id=options-popup></div><div class=popup id=confirm-popup></div><div class=popup id=pdf-warning-popup><p>Você NÃO salvou o PDF!<br>Tem certeza que deseja reiniciar sem salvar o PDF?<div class=popup-buttons><button onclick=confirmReset()>Sim, reiniciar</button> <button onclick=cancelReset()>Cancelar</button></div></div><div class=popup id=obrigatorio-popup><p>Por favor, preencha os seguintes campos obrigatórios:<br><div class=popup-buttons><button onclick='document.getElementById("obrigatorio-popup").style.display="none"'>Fechar</button></div></div><div class=popup id=pdf-reminder-popup><p>Atenção: Você não salvou o PDF! Salve-o para arquivar a evidência.</div><div class=popup id=body-popup onclick='this.style.display="none",event.stopPropagation()'>⚠️ ATENÇÃO: Todos os campos estão bloqueados!<br>Reinicie a página utilizando o botão "REINICIAR".</div><div class=container><h2 style=text-align:center;font-size:25px;font-weight:700;color:#e63946>MODELO RETORNO DE CAMPO<br>PODAS PREVETIVA/CORRETIVA</h2><h2 style=text-align:center;font-size:21px;font-weight:700;color:#000>(Versão 3.0)</h2><div id=equipes-container style=text-align:center;margin-bottom:20px><h3>Selecione a Equipe</h3><button onclick='selecionarEquipe("linhaVivaPreventiva",this)'class=button-default type=button>Linha Viva Preventiva</button> <button onclick='selecionarEquipe("linhaVivaCorretiva",this)'class=button-default type=button>Linha Viva Corretiva</button> <button onclick='selecionarEquipe("pesadaPreventiva",this)'class=button-default type=button>Pesada Preventiva</button> <button onclick='selecionarEquipe("pesadaCorretiva",this)'class=button-default type=button>Pesada Corretiva</button> <button onclick='selecionarEquipe("emergencial",this)'class=button-default type=button>Emergencial</button> <button onclick='selecionarEquipe("podaEquipe",this)'class=button-default type=button>Equipe de Poda</button> <button onclick='selecionarEquipe("podaEmergencial",this)'class=button-default type=button>Equipe de Poda Emergencial</button></div><div id=formFields><input id=outroLead placeholder="Digite o nome do LEAD"class=hidden><h2 style="color:#000;font-size:22px;text-align:center;margin:20px 0;border-bottom:5px solid #000">Preencha os dados da Equipe</h2><label for=pessoa>Nome do Componente:</label> <select id=pessoa></select> <input id=outraPessoa placeholder="Digite o nome da pessoa"class=hidden> <label for=lead>LEAD:</label> <select id=lead></select><div class=input-container><div class=input-group><label for=br1>BR LÍDER:</label> <input id=br1 placeholder="12 DÍGITOS"maxlength=12 pattern=\d* inputmode=numeric type=tel oninput='fixPrefixInput(this,"BR")'onkeydown='enforcePrefix(event,"BR")'value=BR></div></div><h2 style="color:#e63946;font-size:22px;text-align:center;margin:20px 0;border-bottom:5px solid #e63946">Preencha dados da Execução</h2><label>OT/ANE:</label> <input id=ot_ane placeholder="INSIRA APENAS NÚMEROS"maxlength=7 pattern=\d* inputmode=numeric type=tel> <label>SGM:</label> <input id=sgm placeholder="INSIRA APENAS NÚMEROS"maxlength=10 pattern=\d* inputmode=numeric type=tel> <label>DATA:</label> <input id=data type=date required> <label>BA:</label> <input id=ba placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS"maxlength=10 pattern=\d* inputmode=numeric type=tel oninput='fixPrefixInput(this,"BA")'onkeydown='enforcePrefix(event,"BA")'value=BA> <label>SGD:</label> <input id=sgd placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS"maxlength=8 pattern=\d* inputmode=numeric type=tel> <label>INC:</label> <input id=inc placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS"maxlength=8 pattern=\d* inputmode=numeric type=tel> <label>DT:</label> <input id=dt placeholder="INSIRA APENAS NÚMEROS SEM ZEROS, 8 DÍGITOS"maxlength=10 pattern=\d* inputmode=numeric type=tel oninput='fixPrefixInput(this,"DT")'onkeydown='enforcePrefix(event,"DT")'value=DT> <label>APR DIGITAL:</label> <input id=apr placeholder="INSIRA APENAS NÚMEROS, 7 DÍGITOS"maxlength=7 pattern=\d* inputmode=numeric type=tel> <label>APR MANUAL (PAPEL):</label> <input id=apr2 placeholder="INSIRA APENAS NÚMEROS, 11 DÍGITOS"maxlength=11 pattern=\d* inputmode=numeric type=tel> <label>5RO:</label><div id=cincoRO-container><button onclick='selectCincoRO("SIM",this)'class=button-default type=button id=cincoRO-sim>SIM</button> <button onclick='selectCincoRO("NÃO",this)'class=button-default type=button id=cincoRO-nao>NÃO</button> <input id=cincoRO-input class=hidden readonly></div><h2 style="color:#e63946;font-size:22px;text-align:center;margin:20px 0;border-bottom:5px solid #e63946">Informação de campo!</h2><label>TRAFO:</label> <input id=traf placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS"maxlength=10 pattern=^[A-Za-z0-9]{1,10}$> <label>TOMBAMENTO:</label> <input id=Tomb placeholder="INSIRA APENAS NÚMEROS, MÁXIMO 10 DÍGITOS"maxlength=10 pattern=^[A-Za-z0-9]{1,10}$> <label>ESTRUTURA:</label> <input id=estrut placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS"maxlength=10 pattern=^[A-Za-z0-9]{1,10}$> <label>ALIM:</label> <input id=alim placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 7 DÍGITOS"maxlength=7 pattern=[A-Za-z0-9]{7}> <label>ENDEREÇO:</label> <input id=endereco placeholder="INSIRA ENDEREÇO COMPLETO"><br><br><h2 style="color:#e63946;font-size:22px;text-align:center;margin:20px 0;border-bottom:5px solid #e63946">Descreva detalhes da Atividade</h2><div class=input-container><div class=time-input-group><label for=start-time>Horário de Início:</label> <input id=start-time placeholder=HH:mm maxlength=5 inputmode=numeric type=tel oninput=insertColon(this)></div><div class=time-input-group><label for=end-time>Horário Final:</label> <input id=end-time placeholder=HH:mm maxlength=5 inputmode=numeric type=tel oninput=insertColon(this)></div></div><h3>Poda Realizada?</h3><div id=PODA-container><button onclick='selectPODAOption("BT",this)'class=button-default type=button id=PODA-BT>BT</button> <button onclick='selectPODAOption("MT",this)'class=button-default type=button id=PODA-MT>MT</button> <button onclick=selectPODARealizada(this) class=button-default type=button id=PODA-NAO>NÃO FOI REALIZADO PODA</button> <input id=PODA-input class=hidden readonly></div><div class=hidden id=podaExtras><div style=display:flex;gap:10px><div style=flex:1><label for=qtdPodas>Quantidade de Podas (unidades):</label> <input id=qtdPodas placeholder="Ex: 3"type=number oninput=atualizarTotalPodas(),gerarMensagem() max=999></div><div style=flex:1><label for=totalM2>Total m²:</label> <input id=totalM2 placeholder="Total m²"readonly></div></div><label for=m2PorPoda>Metros quadrados por poda:</label> <input id=m2PorPoda placeholder="Ex: 15"type=number oninput=atualizarTotalPodas(),gerarMensagem() step=any></div><h3>Serviço Realizado?</h3><button onclick='toggleEditableField("servico","sim",this)'class=button-default data-field=servico>Sim</button> <button onclick='toggleEditableField("servico","nao",this)'class=button-default data-field=servico>Não</button><div class=hidden id=servico><label>Descrição:</label> <input id=descricaoServico class=preview-text></div><h3>Material Utilizado?</h3><button onclick='toggleEditableField("material","sim",this)'class=button-default data-field=material>Sim</button> <button onclick='toggleEditableField("material","nao",this)'class=button-default data-field=material>Não</button><div class=hidden id=material><label>Descrição:</label> <input id=descricaoMaterial class=preview-text></div><h3>Devolução Sucata Gerada?</h3><button onclick='toggleEditableField("sucata","sim",this)'class=button-default data-field=sucata>Sim</button> <button onclick='toggleEditableField("sucata","nao",this)'class=button-default data-field=sucata>Não</button><div class=hidden id=sucata><label>Descrição:</label> <input id=descricaoSucata class=preview-text></div><h3>Necessário Envio de outra Equipe?</h3><button onclick='toggleEditableField("recurso","sim",this)'class=button-default data-field=recurso>Sim</button> <button onclick='toggleEditableField("recurso","nao",this)'class=button-default data-field=recurso>Não</button><div class=hidden id=recurso><label>Descrição:</label> <input id=descricaoRecurso class=preview-text></div><br><br><button onclick='gerarMensagem(),document.getElementById("gerar-popup").style.display="block",showOverlay()'class=button-gerarMensagem>Gerar Mensagem</button><br><br><h3>Pré-Visualização da Mensagem</h3><div class=preview-box id=previewBox></div><div class=share-buttons><button onclick=enviarWhatsApp() class=button-enviarWhatsApp id=whatsappButton disabled>Encaminhar para WhatsApp</button> <button onclick=savePdf() class=button-default id=pdfButton>Salvar PDF</button></div><br><img alt="Logo ENEL"src=https://upload.wikimedia.org/wikipedia/commons/2/22/Enel_Group_logo.svg style=width:193px;height:auto;display:block;margin:auto></div></div><p style="text-align:center;font-style:italic;font-family:'Courier New',Courier,monospace;margin-top:40px">© 2025 Emanuel Aguiar (Assistente Administrativo Insourcing - Enel CE)<br>Todos os direitos reservados.<div class=container style=text-align:center;margin-top:20px><button onclick=resetSprint() id=reset-button style="font-style:italic;font-family:'Courier New',Courier,monospace;margin-top:10px">REINICIAR</button></div><script>// Funções para exibir/ocultar overlay
+    function showOverlay() {
+      document.getElementById('popupOverlay').style.display = 'block';
+    }
+    function hideOverlay() {
+      document.getElementById('popupOverlay').style.display = 'none';
+    }
+    document.getElementById('popupOverlay').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('atencao-popup').style.display = 'block';
+    });
+    
+    // Variáveis globais e funções de manipulação do formulário
+    let globalTimerStart = null;
+    let globalTimerInterval = null;
+    let pdfSaved = false;
+    let lastInteraction = Date.now();
+    let currentOptionField = "";
+    let currentOptionButton = null;
+    
+    let respServico = "";
+    let respMaterial = "";
+    let respSucata = "";
+    let respRecurso = "";
+    
+    let cincoROValue = "";
+    
+    let notas = {
+      servico: "",
+      material: "",
+      sucata: "",
+      recurso: ""
+    };
+    let fieldsAnswered = {
+      servico: false,
+      material: false,
+      sucata: false,
+      recurso: false
+    };
+    
+    const optionsForField = {
+      servico: ["CARROS NO LOCAL", "FALTA DE TEMPO HÁBIL", "DOCUMENTOS DIVERGENTE", "CHUVA", "UMIDADE 85% SUPERIOR PREVISTO NA IT 1403", "OUTROS", "ÁREA DE RISCO"],
+      material: ["NÃO FOI SOLICITADO MATERIAL PARA ESTE ATENDIMENTO", "NÃO HOUVE UTILIZAÇÃO DE MATERIAL", "APOIO DE OUTRA EQUIPE", "OUTROS"],
+      sucata: ["SEM SUCATA GERADA", "OUTROS"],
+      recurso: ["ENVIAR EQUIPE PESADA", "NECESSARIO EQUIPE DE PODA", "NECESSARIO RECOLHA DE RESÍDUOS", "NECESSÁRIO EQUIPE DO EMERGENCIAL", "OUTROS"]
+    };
+    const messagesForField = {
+      servico: "SELECIONE O MOTIVO:",
+      material: "SELECIONE O MOTIVO:",
+      sucata: "SELECIONE O MOTIVO:",
+      recurso: "SELECIONE O MOTIVO:"
+    };
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      const camposNumericos = ["ot_ane", "sgd", "inc"];
+      camposNumericos.forEach(id => {
+        document.getElementById(id).addEventListener("input", function () {
+          this.value = this.value.replace(/\D/g, '');
+        });
+      });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+      const camposValidos = ["traf", "estrut", "alim"];
+      camposValidos.forEach(id => {
+        document.getElementById(id).addEventListener("input", function () {
+          this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+        });
+      });
+    });
+    
+    // Função para os campos opcionais
+    function toggleEditableField(field, choice, btn) {
+      const container = document.getElementById(field);
+      const buttons = document.querySelectorAll("button[data-field='" + field + "']");
+      buttons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    
+      if (field === "recurso") {
+        if (choice === 'sim') {
+          container.classList.add('hidden');
+          let customOptions = ["ENVIAR EQUIPE PESADA", "NECESSARIO EQUIPE DE PODA", "NECESSARIO RECOLHA DE RESÍDUOS", "NECESSÁRIO EQUIPE DO EMERGENCIAL", "OUTROS"];
+          showOptionsPopup(field, customOptions);
+          respRecurso = "SIM";
+        } else { 
+          container.classList.remove('hidden');
+          document.getElementById('descricaoRecurso').value = "SERVIÇO CONCLUÍDO 100%";
+          respRecurso = "NÃO";
+          fieldsAnswered[field] = true;
+        }
+        gerarMensagem();
+        return;
+      }
+      
+      if (choice === 'sim') {
+        container.classList.remove('hidden');
+        if (field === "servico") { document.getElementById('descricaoServico').value = ""; respServico = "SIM"; }
+        if (field === "material") { document.getElementById('descricaoMaterial').value = ""; respMaterial = "SIM"; }
+        if (field === "sucata") { document.getElementById('descricaoSucata').value = ""; respSucata = "SIM"; }
+        fieldsAnswered[field] = true;
+      } else {
+        container.classList.add('hidden');
+        showOptionsPopup(field);
+      }
+      gerarMensagem();
+    }
+    
+    function selectCincoRO(value, btn) {
+      document.getElementById('cincoRO-sim').classList.remove('selected');
+      document.getElementById('cincoRO-nao').classList.remove('selected');
+      btn.classList.add('selected');
+      cincoROValue = value;
+      let input = document.getElementById('cincoRO-input');
+      input.classList.remove('hidden');
+      input.value = value;
+      gerarMensagem();
+    }
+    
+    let podaValues = [];
+    let podaNaoRealizada = false;
+    
+    function selectPODAOption(value, btn) {
+      if (document.getElementById("PODA-NAO").classList.contains("selected")) {
+        document.getElementById("PODA-NAO").classList.remove("selected");
+        podaNaoRealizada = false;
+      }
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        podaValues = podaValues.filter(v => v !== value);
+      } else {
+        btn.classList.add("selected");
+        podaValues.push(value);
+      }
+    
+      const input = document.getElementById("PODA-input");
+      if (podaValues.length > 0) {
+        input.classList.remove("hidden");
+        input.value = podaValues.join("/");
+        document.getElementById('podaExtras').classList.remove("hidden");
+      } else {
+        input.classList.add("hidden");
+        input.value = "";
+        document.getElementById('podaExtras').classList.add("hidden");
+      }
+      gerarMensagem();
+    }
+    
+    function selectPODARealizada(btn) {
+      document.getElementById("PODA-BT").classList.remove("selected");
+      document.getElementById("PODA-MT").classList.remove("selected");
+      podaValues = [];
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        podaNaoRealizada = false;
+        document.getElementById("PODA-input").classList.add("hidden");
+        document.getElementById("PODA-input").value = "";
+      } else {
+        btn.classList.add("selected");
+        podaNaoRealizada = true;
+        document.getElementById("PODA-input").classList.remove("hidden");
+        document.getElementById("PODA-input").value = "NÃO FOI REALIZADO PODA";
+        document.getElementById('podaExtras').classList.add("hidden");
+        document.getElementById('qtdPodas').value = "";
+        document.getElementById('m2PorPoda').value = "";
+        document.getElementById('totalM2').value = "";
+      }
+      gerarMensagem();
+    }
+    
+    function atualizarTotalPodas() {
+      let qtd = document.getElementById('qtdPodas').value;
+      let m2 = document.getElementById('m2PorPoda').value;
+      if(qtd.trim() !== "" && m2.trim() !== "") {
+          let total = Number(qtd) * Number(m2);
+          document.getElementById('totalM2').value = total;
+      } else {
+          document.getElementById('totalM2').value = "";
+      }
+    }
+    
+    function formatarData(data) {
+      const partes = data.split("-");
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+    
+    function disableFields() {
+      const formFields = document.getElementById("formFields");
+      const fields = formFields.querySelectorAll("input, select, textarea, button");
+      fields.forEach(field => { field.disabled = true; });
+    }
+    function enableFields() {
+      const formFields = document.getElementById("formFields");
+      const fields = formFields.querySelectorAll("input, select, textarea, button");
+      fields.forEach(field => { field.disabled = false; });
+    }
+    
+    function formatTime(totalSeconds) {
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+      let result = "";
+      if (minutes > 0) {
+        result += minutes + (minutes === 1 ? " minuto" : " minutos");
+        if (seconds > 0) result += " e " + seconds + (seconds === 1 ? " segundo" : " segundos");
+      } else {
+        result += seconds + (seconds === 1 ? " segundo" : " segundos");
+      }
+      return result;
+    }
+    function formatFullDateTime(date) {
+      const meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+      let dia = date.getDate();
+      let mes = meses[date.getMonth()];
+      let ano = date.getFullYear();
+      let horas = date.getHours();
+      let minutos = date.getMinutes();
+      let segundos = date.getSeconds();
+      let strHoras = `${horas} ${horas === 1 ? "hora" : "horas"}`;
+      let strMinutos = `${minutos} ${minutos === 1 ? "minuto" : "minutos"}`;
+      let strSegundos = `${segundos} ${segundos === 1 ? "segundo" : "segundos"}`;
+      return `${dia} de ${mes} de ${ano} às ${strHoras} e ${strMinutos} e ${strSegundos}`;
+    }
+    
+    function startSprint() {
+      document.getElementById('welcome-popup').style.display = 'none';
+      document.getElementById('global-clock').style.display = 'block';
+      globalTimerStart = Date.now();
+      globalTimerInterval = setInterval(function() {
+        let totalSeconds = Math.floor((Date.now() - globalTimerStart) / 1000);
+        document.getElementById('global-clock').textContent = formatTime(totalSeconds);
+      }, 1000);
+      document.getElementById('yes-notification-popup').style.display = 'block';
+      setTimeout(function() {
+        document.getElementById('yes-notification-popup').style.display = 'none';
+      }, 3000);
+      enableFields();
+      document.getElementById('clickOverlay').style.display = 'none';
+      document.getElementById('body-popup').style.display = 'none';
+      hideOverlay();
+    }
+    function handleNoSprint() {
+      document.getElementById('welcome-popup').style.display = 'none';
+      document.getElementById('no-notification-popup').style.display = 'block';
+      setTimeout(function() {
+        document.getElementById('no-notification-popup').style.display = 'none';
+      }, 5000);
+      document.getElementById('clickOverlay').style.display = 'block';
+    }
+    
+    function resetSprint() {
+      let popup = document.getElementById('pdf-warning-popup');
+      popup.innerHTML = `
+          <p>Deseja reiniciar página, todo conteúdo preenchido será perdido?</p>
+          <div class="popup-buttons">
+            <button onclick="confirmReset()">Sim</button>
+            <button onclick="cancelReset()">Cancelar</button>
+          </div>`;
+      popup.style.display = 'block';
+      showOverlay();
+    }
+    function confirmReset() {
+      document.getElementById('pdf-warning-popup').style.display = 'none';
+      window.location.reload();
+    }
+    function cancelReset() {
+      document.getElementById('pdf-warning-popup').style.display = 'none';
+    }
+    
+    function gerarMensagem() {
+      let msg = `------- *DADOS DA BAIXA* -------\n`;
+      msg += `*NOME:* ${document.getElementById('pessoa').value.toUpperCase()}\n`;
+      msg += `*LEAD:* ${document.getElementById('lead').value.toUpperCase()}\n`;
+      msg += `*BR LÍDER:* ${document.getElementById('br1').value.toUpperCase()}\n`;
+      msg += `*OT/ANE:* ${document.getElementById('ot_ane').value.toUpperCase()}\n`;
+      msg += `*SGM:* ${document.getElementById('sgm').value.toUpperCase()}\n`;
+      msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
+      msg += `*BA:* ${document.getElementById('ba').value.toUpperCase()}\n`;
+      msg += `*SGD:* ${document.getElementById('sgd').value.toUpperCase()}\n`;
+      msg += `*INC:* 00${document.getElementById('inc').value.toUpperCase()}\n`;
+      msg += `*DT:* ${document.getElementById('dt').value.toUpperCase()}\n`;
+      msg += `*APR DIGITAL:* ${document.getElementById('apr').value.toUpperCase()}\n`;
+      msg += `*APR MANUAL:* ${document.getElementById('apr2').value.toUpperCase()}\n`;
+      msg += `*5RO:* ${cincoROValue.toUpperCase()}\n`;
+      msg += `*TIPO DE PODA:* ${document.getElementById('PODA-input').value.toUpperCase()}\n`;
+      
+      if (podaValues.length > 0) {
+        let qtdPodas = document.getElementById('qtdPodas').value;
+        if (qtdPodas.trim() !== "") {
+          msg += `*QUANTIDADE DE PODAS:* ${qtdPodas}\n`;
+        }
+        let m2PorPoda = document.getElementById('m2PorPoda').value;
+        if (qtdPodas.trim() !== "" && m2PorPoda.trim() !== "") {
+          let totalM2 = Number(qtdPodas) * Number(m2PorPoda);
+          msg += `*M² TOTAL:* ${totalM2}\n`;
+        }
+      } else if (podaNaoRealizada) {
+        msg += `*PODA:* NÃO FOI REALIZADO PODA\n`;
+      }
+      
+      msg += `*TRAFO:* ${document.getElementById('traf').value.toUpperCase()}\n`;
+      msg += `*TOMBAMENTO:* ${document.getElementById('Tomb').value.toUpperCase()}\n`;
+      msg += `*ESTRUTURA:* ${document.getElementById('estrut').value.toUpperCase()}\n`;
+      msg += `*ALIM:* ${document.getElementById('alim').value.toUpperCase()}\n`;
+      msg += `*ENDEREÇO:* ${document.getElementById('endereco').value.toUpperCase()}\n`;
+      msg += `*HORÁRIO INÍCIO:* ${document.getElementById('start-time').value.toUpperCase()}\n`;
+      msg += `*HORÁRIO FINAL:* ${document.getElementById('end-time').value.toUpperCase()}\n\n`;
+      msg += `------- *DESCRIÇÃO ATIVIDADE* -------\n\n`;
+      
+      if (respServico === "SIM") {
+        let desc = document.getElementById('descricaoServico').value;
+        if(desc.trim() !== "") {
+          msg += `*SERVIÇO REALIZADO*\n${desc.toUpperCase()}\n\n`;
+        }
+      } else if (respServico === "NÃO") {
+        let note = document.getElementById('descricaoServico').value;
+        if(note.trim() !== "") {
+          msg += `*SERVIÇO NÃO REALIZADO MOTIVO:*\n${note.toUpperCase()}\n\n`;
+        }
+      }
+      if (respMaterial === "SIM") {
+        let desc = document.getElementById('descricaoMaterial').value;
+        if(desc.trim() !== "") {
+          msg += `*MATERIAL UTILIZADO*\n${desc.toUpperCase()}\n\n`;
+        }
+      } else if (respMaterial === "NÃO") {
+        let note = document.getElementById('descricaoMaterial').value;
+        if(note.trim() !== "") {
+          msg += `*MATERIAL NÃO UTILIZADO MOTIVO:*\n${note.toUpperCase()}\n\n`;
+        }
+      }
+      if (respSucata === "SIM") {
+        let desc = document.getElementById('descricaoSucata').value;
+        if(desc.trim() !== "") {
+          msg += `*DEVOLUÇÃO SUCATA GERADA*\n${desc.toUpperCase()}\n\n`;
+        }
+      } else if (respSucata === "NÃO") {
+        let note = document.getElementById('descricaoSucata').value;
+        if(note.trim() !== "") {
+          msg += `*DEVOLUÇÃO SUCATA NÃO GERADA MOTIVO:*\n${note.toUpperCase()}\n\n`;
+        }
+      }
+      if (respRecurso === "SIM") {
+        let desc = document.getElementById('descricaoRecurso').value;
+        if(desc.trim() !== "") {
+          msg += `*NECESSÁRIO OUTRO RECURSO?*\n${desc.toUpperCase()}\n\n`;
+        }
+      } else if (respRecurso === "NÃO") {
+        let note = document.getElementById('descricaoRecurso').value;
+        if(note.trim() !== "") {
+          msg += `*NECESSÁRIO OUTRO RECURSO MOTIVO:*\n${note.toUpperCase()}\n\n`;
+        }
+      }
+      
+      let sessionTime = "";
+      if (globalTimerStart) {
+        let sessionSeconds = Math.floor((Date.now() - globalTimerStart) / 1000);
+        sessionTime = "*TEMPO DA SESSÃO:* " + formatTime(sessionSeconds) + "\n";
+      }
+      let now = new Date();
+      let fullDate = formatFullDateTime(now);
+      msg += `${sessionTime}${fullDate}`;
+      
+      document.getElementById('previewBox').textContent = msg;
+    }
+    
+    function verificarCamposRespondidos() {
+      let missing = [];
+      let data = document.getElementById('data').value;
+      if (!data || data.trim() === "") { missing.push("📅 Data"); }
+      let pessoa = document.getElementById('pessoa').value;
+      if (!pessoa || pessoa.trim() === "") { missing.push("👤 Nome do Componente"); }
+      let lead = document.getElementById('lead').value;
+      if (!lead || lead.trim() === "") { missing.push("🏷️ LEAD"); }
+      let brLider = document.getElementById('br1').value;
+      if (!brLider || brLider.trim() === "") { missing.push("🆔 BR LÍDER"); }
+      let startTime = document.getElementById('start-time').value;
+      if (!startTime || startTime.trim() === "") { missing.push("🕒 Horário de Início da atividade"); }
+      let endTime = document.getElementById('end-time').value;
+      if (!endTime || endTime.trim() === "") { missing.push("🕒 Horário Final da atividade"); }
+      
+      if ((!podaValues.length) && !podaNaoRealizada) {
+          missing.push("🌳 Selecione uma opção no campo de Poda");
+      } else if (podaValues.length > 0) {
+          let qtdPodas = document.getElementById('qtdPodas').value;
+          let m2PorPoda = document.getElementById('m2PorPoda').value;
+          if (qtdPodas.trim() === "") { missing.push("🌳 Insira Qtd. total de podas realizadas"); }
+          if (m2PorPoda.trim() === "") { missing.push("🌳 Insira Qtd. realizada (m²)"); }
+      }
+      
+      for (let key in fieldsAnswered) {
+        if (!fieldsAnswered[key]) {
+          if (key === "servico") { missing.push("🔧 Serviço Realizado"); }
+          else if (key === "material") { missing.push("🛠️ Material Utilizado"); }
+          else if (key === "sucata") { missing.push("♻️ Devolução Sucata Gerada"); }
+          else if (key === "recurso") { missing.push("❗ Necessário Outro Recurso"); }
+        }
+      }
+      
+      if (missing.length > 0) {
+        let msg = "Por favor, preencha os seguintes campos obrigatórios:<br>" + missing.join("<br>");
+        let popup = document.getElementById('obrigatorio-popup');
+        popup.innerHTML = `<p>${msg}</p>
+          <div class="popup-buttons">
+            <button onclick="document.getElementById('obrigatorio-popup').style.display='none';">Fechar</button>
+          </div>`;
+        popup.style.display = 'block';
+        return false;
+      }
+      return true;
+    }
+    
+    function enviarWhatsApp() {
+      if (!verificarCamposRespondidos()) return;
+      if (!pdfSaved) {
+        let popup = document.getElementById('pdf-warning-popup');
+        popup.innerHTML = `
+          <p>Salve primeiro o PDF! Antes de encaminhar</p>
+          <div class="popup-buttons">
+            <button onclick="document.getElementById('pdf-warning-popup').style.display='none'; hideOverlay();">Fechar</button>
+          </div>`;
+        popup.style.display = 'block';
+        showOverlay();
+        return;
+      }
+      continuarWhatsApp();
+    }
+    
+    function insertColon(input) {
+      let value = input.value.replace(/[^0-9]/g, '');
+      if (value.length >= 3) {
+        value = value.slice(0, 2) + ':' + value.slice(2, 4);
+      }
+      if (value.length > 5) {
+        value = value.slice(0, 5);
+      }
+      input.value = value;
+    }
+    
+    function continuarWhatsApp() {
+      document.getElementById('pdf-warning-popup').style.display = 'none';
+      hideOverlay();
+      const mensagem = encodeURIComponent(document.getElementById('previewBox').textContent);
+      const url = `https://wa.me/?text=${mensagem}`;
+      window.open(url, '_blank');
+    }
+    function cancelarWhatsApp() {
+      document.getElementById('pdf-warning-popup').style.display = 'none';
+      hideOverlay();
+    }
+    
+    function savePdf() {
+      if (!verificarCamposRespondidos()) { return; }
+      gerarMensagem();
+      let container = document.querySelector('.container');
+      let width = container.offsetWidth;
+      let height = container.offsetHeight;
+      
+      let lead = document.getElementById('lead').value.trim();
+      let data = document.getElementById('data').value.trim();
+      let ot_ane = document.getElementById('ot_ane').value.trim();
+      let inc = document.getElementById('inc').value.trim();
+      let endereco = document.getElementById('endereco').value.trim();
+      
+      if (data !== "") {
+        let parts = data.split("-");
+        data = parts[2] + "_" + parts[1] + "_" + parts[0];
+      }
+      
+      lead = lead.replace(/\s+/g, "_");
+      ot_ane = ot_ane.replace(/\s+/g, "_");
+      inc = inc.replace(/\s+/g, "_");
+      endereco = endereco.replace(/\s+/g, "_");
+      
+      let fileName = "RETORNO_CAMPO EXECUTADO_";
+      if (lead !== "") { fileName += lead; }
+      if (data !== "") { fileName += "_EM_" + data; }
+      if (ot_ane !== "") { fileName += "_ATRAVÉS_OT-ANE_" + ot_ane; }
+      else if (inc !== "") { fileName += "_ATRAVÉS_INCIDÊNCIA_" + inc; }
+      if (endereco !== "") { fileName += "_NO_ENDERECO_" + endereco; }
+      fileName += ".PDF";
+      
+      fileName = fileName.toUpperCase();
+      
+      html2pdf().set({
+        margin: 0,
+        filename: fileName,
+        image: { type: 'jpeg', quality: 0.99 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'px', format: [width, height], orientation: 'portrait' }
+      }).from(container).save().then(() => {
+        let pdfButton = document.getElementById('pdfButton');
+        pdfButton.textContent = 'PDF JÁ SALVO';
+        pdfButton.style.backgroundColor = '#4CAF50';
+        pdfButton.style.color = '#fff';
+        pdfButton.style.border = '1px solid #4CAF50';
+        pdfButton.disabled = true;
+        pdfSaved = true;
+        document.getElementById('whatsappButton').disabled = false;
+      });
+    }
+    
+    document.getElementById('clickOverlay').addEventListener('click', function(e) {
+      document.getElementById('body-popup').style.display = 'block';
+      e.stopPropagation();
+    });
+    
+    function closeUpdatePopup() {
+      document.getElementById('update-popup').style.display = 'none';
+      document.getElementById('welcome-popup').style.display = 'block';
+      hideOverlay();
+    }
+    
+    function showOptionsPopup(field) {
+      currentOptionField = field;
+      let popup = document.getElementById('options-popup');
+      let options = optionsForField[field] || [];
+      let customMessage = messagesForField[field] || `Selecione o motivo para não realizar execução do "${field.toUpperCase()}"`;
+      let html = `<p>${customMessage}</p><div class="popup-buttons">`;
+      options.forEach(option => {
+        html += `<button onclick="confirmOption('${field}', '${option}', this)">${option}</button>`;
+      });
+      html += `</div>`;
+      popup.innerHTML = html;
+      popup.style.display = 'block';
+      showOverlay();
+    }
+    
+    function confirmOption(field, option, btn) {
+      currentOptionButton = btn;
+      btn.style.backgroundColor = "#4CAF50";
+      setTimeout(() => {
+        let confirmPopup = document.getElementById('confirm-popup');
+        confirmPopup.className = "popup-confirm";
+        confirmPopup.innerHTML = `<p>Tem certeza que deseja inserir a opção marcada?</p>
+          <div class="popup-buttons">
+            <button class="btn-sim" onclick="finalSelectOption('${field}', '${option}')">Sim</button>
+            <button class="btn-nao" onclick="cancelConfirm()">Não</button>
+          </div>`;
+        confirmPopup.style.display = 'block';
+      }, 100);
+    }
+    
+    function finalSelectOption(field, option) {
+      document.getElementById('confirm-popup').style.display = 'none';
+      selectOption(field, option);
+      hideOverlay();
+    }
+    
+    function cancelConfirm() {
+      document.getElementById('confirm-popup').style.display = 'none';
+      if (currentOptionButton) { 
+        currentOptionButton.style.backgroundColor = "";
+      }
+    }
+    
+    function selectOption(field, optionText) {
+      notas[field] = optionText;
+      fieldsAnswered[field] = true;
+      const container = document.getElementById(field);
+      container.classList.remove('hidden');
+      if (field === "servico") {
+        document.getElementById('descricaoServico').value = optionText;
+        respServico = "NÃO";
+      } else if (field === "material") {
+        document.getElementById('descricaoMaterial').value = optionText;
+        respMaterial = "NÃO";
+      } else if (field === "sucata") {
+        document.getElementById('descricaoSucata').value = optionText;
+        respSucata = "NÃO";
+      } else if (field === "recurso") {
+        document.getElementById('descricaoRecurso').value = optionText;
+        respRecurso = "NÃO";
+      }
+      document.getElementById('options-popup').style.display = 'none';
+      gerarMensagem();
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      let elementos = document.querySelectorAll('#formFields input, #formFields select, #formFields textarea');
+      elementos.forEach(elem => {
+        elem.addEventListener('input', () => { lastInteraction = Date.now(); gerarMensagem(); });
+        elem.addEventListener('change', () => { lastInteraction = Date.now(); gerarMensagem(); });
+      });
+    });
+    
+    function scheduleAutoPreviewUpdate() {
+      let diff = Date.now() - lastInteraction;
+      let interval = (diff < 2 * 60 * 1000) ? 2 * 60 * 1000 : 3 * 60 * 1000;
+      setTimeout(() => { gerarMensagem(); scheduleAutoPreviewUpdate(); }, interval);
+    }
+    
+    window.onload = function() {
+      disableFields();
+      document.getElementById('update-popup').style.display = 'block';
+      lastInteraction = Date.now();
+      scheduleAutoPreviewUpdate();
+    }
+    
+    function enforcePrefix(e, prefix) {
+      const input = e.target;
+      setTimeout(() => {
+        if (input.selectionStart < prefix.length) {
+          input.setSelectionRange(prefix.length, prefix.length);
+        }
+      }, 0);
+    }
+    
+    function fixPrefixInput(el, prefix) {
+      let currentVal = el.value;
+      if (currentVal.length < prefix.length) {
+        el.value = prefix;
+        el.setSelectionRange(prefix.length, prefix.length);
+      } else if (!currentVal.toUpperCase().startsWith(prefix)) {
+        let withoutPrefix = currentVal.replace(new RegExp('^' + prefix, 'i'), '');
+        el.value = prefix + withoutPrefix;
+        el.setSelectionRange(prefix.length, prefix.length);
+      }
+    }
+    
+    /* === NOVA FUNCIONALIDADE: Seleção de Equipe === */
+    // Objeto com os dados para cada equipe, agora incluindo dois novos:
+    const equipes = {
+      linhaVivaPreventiva: {
+        pessoa: ["Membro LV Prev 1", "Membro LV Prev 2", "Membro LV Prev 3"],
+        lead: ["LEAD LV Prev A", "LEAD LV Prev B", "LEAD LV Prev C"]
+      },
+      linhaVivaCorretiva: {
+        pessoa: ["Membro LV Corr 1", "Membro LV Corr 2"],
+        lead: ["LEAD LV Corr A", "LEAD LV Corr B"]
+      },
+      pesadaPreventiva: {
+        pessoa: ["Membro Pesada Prev 1", "Membro Pesada Prev 2"],
+        lead: ["LEAD Pesada Prev A", "LEAD Pesada Prev B"]
+      },
+      pesadaCorretiva: {
+        pessoa: ["Membro Pesada Corr 1", "Membro Pesada Corr 2"],
+        lead: ["LEAD Pesada Corr A", "LEAD Pesada Corr B"]
+      },
+      emergencial: {
+        pessoa: ["Membro Emergencial 1", "Membro Emergencial 2"],
+        lead: ["LEAD Emergencial A", "LEAD Emergencial B"]
+      },
+      podaEquipe: {
+        pessoa: ["Membro Poda 1", "Membro Poda 2", "Membro Poda 3"],
+        lead: ["LEAD Poda A", "LEAD Poda B"]
+      },
+      podaEmergencial: {
+        pessoa: ["Membro Poda Emergencial 1", "Membro Poda Emergencial 2"],
+        lead: ["LEAD Poda Emergencial A", "LEAD Poda Emergencial B"]
+      }
+    };
+    
+    // Função que atualiza os selects "pessoa" e "lead" conforme a equipe escolhida
+    function selecionarEquipe(chave, btn) {
+      // Remove a classe "selected" de todos os botões e adiciona no clicado
+      const botoes = document.querySelectorAll('#equipes-container .button-default');
+      botoes.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      
+      // Obtém os dados da equipe selecionada
+      const equipeSelecionada = equipes[chave];
+      if (!equipeSelecionada) return;
+      
+      // Atualiza o select "pessoa"
+      const selectPessoa = document.getElementById("pessoa");
+      selectPessoa.innerHTML = "";  // Limpa as opções anteriores
+      let optPessoa = document.createElement("option");
+      optPessoa.value = equipeSelecionada.pessoa;
+      optPessoa.text = equipeSelecionada.pessoa;
+      selectPessoa.add(optPessoa);
+      
+      // Atualiza o select "lead"
+      const selectLead = document.getElementById("lead");
+      selectLead.innerHTML = "";
+      let optLead = document.createElement("option");
+      optLead.value = equipeSelecionada.lead;
+      optLead.text = equipeSelecionada.lead;
+      selectLead.add(optLead);
+      
+      gerarMensagem();
+    }</script>
