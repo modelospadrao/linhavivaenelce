@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MODELO RETORNO DE CAMPO LINHA VIVA</title>
+  <title>MODELO RETORNO DE CAMPO LINHA VIVA PREVETIVA/CORRETIVA</title>
   <link rel="icon" href="pesada.png" type="image/png">
   <!-- Importa a biblioteca html2pdf -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
@@ -80,7 +80,7 @@
       margin: 5px;
       cursor: pointer; 
       font-size: 14px; 
-      border-radius: 4px;
+      border-radius: 5px;
       transition: all 0.3s ease; 
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
@@ -230,7 +230,8 @@
     }
     #clickOverlay {
       position: fixed; 
-      top: 0; left: 0;
+      top: 0; 
+      left: 0;
       width: 100%; 
       height: 100%;
       background-color: transparent; 
@@ -297,19 +298,18 @@
       background-color: #ffcccc;
       color: #000;
       font-size: 16px;
-      border: 2px solid #ff0000;
+      border: 4px solid #ff0000;
       border-radius: 8px;
       z-index: 1500;
       text-align: center;
     }
     .input-container {
       display: flex;
-      flex-wrap: nowrap;                /* Permite quebra de linha */
+      flex-wrap: nowrap; /* Permite quebra de linha */
       gap: 23px;
-      justify-content: flex-start;    /* Alinha os itens à esquerda */
+      justify-content: flex-start; /* Alinha os itens à esquerda */
     }
     .input-group {
-      /* Define cada grupo para ocupar 50% da linha, descontando metade do gap */
       flex: 0 0 calc(50% - 11.5px);
     }
     .input-container label {
@@ -326,6 +326,48 @@
       border-radius: 3px;
       text-align: left;
     }
+    
+    /* Estilos para os botões e o campo somente leitura */
+    .button-default {
+      border: 1px solid black;
+      padding: 8px 16px;
+      margin: 5px;
+      background-color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .button-default.selected {
+      background-color: #000;
+      color: #fff;
+      border: 1px solid #000;
+    }
+    #selectedTeamType {
+      width: 95%;
+      padding: 9px;
+      margin: 6px 0;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      background-color: #f0f0f0;
+      text-transform: uppercase;
+    }
+    /* Container da seção */
+    #teamSelection {
+      margin: 20px 0;
+      padding: 10px;
+      border: 2px solid #000;
+    }
+    #teamSelection h3 {
+      margin-bottom: 10px;
+    }
+    #teamButtons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -336,13 +378,14 @@
   <div id="update-popup" class="popup" style="font-size: 15px;">
     <p>⚠️ NOTAS DE ATUALIZAÇÃO!!!<br><br>
        1️⃣ O campo "Pré-Visualização da Mensagem" agora é preenchido automaticamente sempre que um valor é alterado.<br>
-       2️⃣ Foram adicionadas mensagens pré-formatadas quando marcada a opção ("NÃO").<br>
+       2️⃣ Foram adicionadas mensagens pré‑formatadas quando marcada a opção ("NÃO").<br>
        3️⃣ Incluídos alertas para lembrar de salvar o arquivo em PDF.<br>
        4️⃣ Agora, o sistema renomeia automaticamente o arquivo PDF para facilitar sua localização, com base no retorno do preenchimento diário.<br>
        5️⃣ Alguns campos foram atualizados, exigindo o preenchimento obrigatório!<br>
        6️⃣ Foram adicionadas novas opções no questionário.<br>
        7️⃣ Foram inseridos campos para o horário de início e fim da atividade.<br>
-       8️⃣ Foi ajustada a condição para salvar primeiro o PDF e, em seguida, encaminhar a mensagem de Pré-visualização.<br>
+       8️⃣ Foi ajustada a condição para salvar primeiro o PDF em seguida encaminhar a mensagem via Whatsapp.<br>
+       9️⃣ Foi ajustado o estilo do Layout, para coincidir com a ordem na "Pré-Visualização da Mensagem"<br><br>
       <br>
       <button onclick="closeUpdatePopup(); hideOverlay();" style="font-size: 15px; padding: 7px 125px; border-radius: 14px; background-color: #fff; color: black; border: none; cursor: pointer; display: block; margin: 0 auto;">
         Fechar
@@ -404,11 +447,27 @@
     <h2 style="text-align: center; font-size: 25px; font-weight: bold; color: #e63946;">
       MODELO RETORNO DE CAMPO<br>LINHA VIVA PREVETIVA/CORRETIVA
     </h2>
-    <h2 style="text-align: center; font-size: 21px; font-weight: bold; color: #000;">(Versão 3.0)</h2>
+    <h2 style="text-align: center; font-size: 21px; font-weight: bold; color: #000;">(Versão 4.0)</h2>
     
     <!-- Início do Formulário -->
     <div id="formFields">
       <input type="text" id="outroLead" class="hidden" placeholder="Digite o nome do LEAD">
+      <h2 style="color: #000000; font-size: 22px; text-align: center; margin: 20px 0; border-bottom: 5px solid #000000;">
+      Informe qual tipo de  Equipe</h2>
+      <!-- Seção para seleção do Tipo de Equipe -->
+      <div id="teamSelection">
+          <div id="teamButtons">
+          <button type="button" class="button-default" onclick="selectTeamType('LINHA VIVA PROGRAMADA', this)">(LR/LC/LE/LV) PROGRAMADA</button>
+          <button type="button" class="button-default" onclick="selectTeamType('LINHA VIVA EMERGENCIAL', this)">(LR/LC/LE/LV) EMERGENCIAL</button>
+          <button type="button" class="button-default" onclick="selectTeamType('MANUTENÇÃO PROGRAMADA', this)">(EP/PP) PROGRAMADA</button>
+          <button type="button" class="button-default" onclick="selectTeamType('MANUTENÇÃO EMERGENCIAL', this)">(EP/PP) EMERGENCIAL</button>
+          <button type="button" class="button-default" onclick="selectTeamType('PODA EMERGENCIA', this)">(PD) EMERGENCIA</button>
+          <button type="button" class="button-default" onclick="selectTeamType('EMERGENCIA', this)">(SI/SG/RD) EMERGENCIA</button>
+        </div>
+        <label for="pessoa">Tipo de Equipe:</label>
+        <!-- Campo somente leitura que exibirá o tipo de equipe selecionado -->
+        <input type="text" id="selectedTeamType" readonly placeholder="Tipo de Equipe Selecionada">
+      </div>
       
       <h2 style="color: #000000; font-size: 22px; text-align: center; margin: 20px 0; border-bottom: 5px solid #000000;">
       Preencha os dados da Equipe</h2>
@@ -465,7 +524,7 @@
       
       <label for="lead">LEAD:</label>
       <select id="lead" onchange="verificarOutroLead()">
-        <option value="NENHUM">NENHUM</option>    
+        <option value="NENHUM">NENHUM</option>
         <option value="DFD-LC-56B">DFD-LC-56B</option>
         <option value="DFD-LC-57B">DFD-LC-57B</option>
         <option value="DFD-LL-41B">DFD-LL-41B</option>
@@ -489,23 +548,20 @@
       </div>
       
       <h2 style="color: #e63946; font-size: 22px; text-align: center; margin: 20px 0; border-bottom: 5px solid #e63946;">
-      Preencha dados da Execução
-    </h2>
+        Preencha dados da Documentação
+      </h2>
       <label>OT/ANE:</label>
       <input type="tel" id="ot_ane" maxlength="7" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS">
       
       <label>SGM:</label>
       <input type="tel" id="sgm" maxlength="10" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS">
      
-      <label>DATA:</label>
-      <input type="date" id="data" required>
+      
       
       <label>BA:</label>
-      <!-- Campo BA: removemos o onfocus para comportamento similar ao DT -->
       <input type="tel" id="ba" value="BA" maxlength="10" pattern="\d*" inputmode="numeric"
              placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS"
-             onkeydown="enforcePrefix(event, 'BA')"
-             oninput="fixPrefixInput(this, 'BA')">
+             onkeydown="enforcePrefix(event, 'BA')" oninput="fixPrefixInput(this, 'BA')">
       
       <label>SGD:</label>
       <input type="tel" id="sgd" maxlength="8" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 8 DÍGITOS">
@@ -523,7 +579,6 @@
       <label>APR MANUAL (PAPEL):</label>
       <input type="tel" id="apr2" maxlength="11" pattern="\d*" inputmode="numeric" placeholder="INSIRA APENAS NÚMEROS, 11 DÍGITOS">
       
-      <!-- Campo 5RO: dois botões e uma caixa de input readonly que será preenchida automaticamente -->
       <label>5RO:</label>
       <div id="cincoRO-container">
         <button type="button" class="button-default" id="cincoRO-sim" onclick="selectCincoRO('SIM', this)">SIM</button>
@@ -531,20 +586,18 @@
         <input type="text" id="cincoRO-input" class="hidden" readonly>
       </div>
       
+    <h2 style="color: #e63946; font-size: 22px; text-align: center; margin: 20px 0; border-bottom: 5px solid #e63946;">
+        Preencha Informação de campo!
+      </h2>
+      
       <label>TRAFO:</label>
-      <input type="text" id="traf" maxlength="10" 
-             pattern="^[A-Za-z0-9]{1,10}$" 
-             placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS">
-
+      <input type="text" id="traf" maxlength="10" pattern="^[A-Za-z0-9]{1,10}$" placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS">
+      
       <label>TOMBAMENTO:</label>
-      <input type="text" id="Tomb" maxlength="10" 
-             pattern="^[A-Za-z0-9]{1,10}$" 
-             placeholder="INSIRA APENAS NÚMEROS, MÁXIMO 10 DÍGITOS">
-
+      <input type="text" id="Tomb" maxlength="10" pattern="^[A-Za-z0-9]{1,10}$" placeholder="INSIRA APENAS NÚMEROS, MÁXIMO 10 DÍGITOS">
+      
       <label>ESTRUTURA:</label>
-      <input type="text" id="estrut" maxlength="10" 
-             pattern="^[A-Za-z0-9]{1,10}$" 
-             placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS">
+      <input type="text" id="estrut" maxlength="10" pattern="^[A-Za-z0-9]{1,10}$" placeholder="INSIRA APENAS LETRAS E NÚMEROS, MÁXIMO 10 DÍGITOS">
       
       <label>ALIM:</label>
       <input type="text" id="alim" maxlength="7" pattern="[A-Za-z0-9]{7}" placeholder="INSIRA APENAS LETRAS E NÚMEROS SEM ESPAÇOS OU TRAÇOS, 7 DÍGITOS">
@@ -553,32 +606,81 @@
       <input type="text" id="endereco" placeholder="INSIRA ENDEREÇO COMPLETO">
       <br><br>
       
+      <h2 style="color: #e63946; font-size: 22px; text-align: center; margin: 20px 0; border-bottom: 5px solid #e63946;">
+        Descreva detalhes da Atividade
+      </h2>
+      <label>DATA:</label>
+      <input type="date" id="data" required>
+      
       <div class="input-container">
         <div class="time-input-group">
           <label for="start-time">Horário de Início:</label>
-          <input 
-            type="tel" 
-            inputmode="numeric" 
-            id="start-time" 
-            maxlength="5" 
-            placeholder="HH:mm" 
-            oninput="insertColon(this)">
+          <input type="tel" inputmode="numeric" id="start-time" maxlength="5" placeholder="HH:mm" oninput="insertColon(this)">
         </div>
         <div class="time-input-group">
           <label for="end-time">Horário Final:</label>
-          <input 
-            type="tel" 
-            inputmode="numeric" 
-            id="end-time" 
-            maxlength="5" 
-            placeholder="HH:mm" 
-            oninput="insertColon(this)">
+          <input type="tel" inputmode="numeric" id="end-time" maxlength="5" placeholder="HH:mm" oninput="insertColon(this)">
         </div>
       </div>
-      <h2 style="color: #e63946; font-size: 22px; text-align: center; margin: 20px 0; border-bottom: 5px solid #e63946;">
-      Descreva detalhes da Atividade
-    </h2>
-      <!-- Campos opcionais para Serviço, Material, Sucata e Recurso -->
+      
+      <!-- Substitua este trecho HTML no seu formulário -->
+        <h3>Poda Realizada (unidades)</h3>
+        <div id="PODAUNIT-container">
+          <button type="button" id="PODAUNIT-BT" class="button-default"
+                  onclick="selectPODAUnitOption('BT', this)">BT</button>
+          <button type="button" id="PODAUNIT-MT" class="button-default"
+                  onclick="selectPODAUnitOption('MT', this)">MT</button>
+          <button type="button" id="PODAUNIT-NAO" class="button-default"
+                  onclick="selectPODAUnitRealizada(this)">
+            NÃO FOI REALIZADO PODA UNITÁRIA
+          </button><br>
+          <input type="text" id="PODAUNIT-input" class="hidden" readonly>
+        </div>
+
+        <div id="podaUnitExtras" class="hidden">
+          <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+              <label for="qtdPodasUnit">Qtd. de Podas (unidades):</label>
+              <input type="number" id="qtdPodasUnit" max="999" placeholder="Ex: 3"
+                     oninput="
+                       this.value = this.value.replace(/\D/g,'').slice(0,3);
+                       atualizarTotalPodasUnit();
+                       gerarMensagem();
+                     ">
+            </div>
+            <div style="flex: 1;">
+              <label for="totalUnit">Total de Unidades:</label>
+              <input type="text" id="totalUnit" readonly placeholder="Total unidades">
+            </div>
+          </div>
+      </div>
+      
+       <!-- Grupo de botões para PODA -->
+      <h3>Poda Realizada (m²)</h3>
+      <div id="PODA-container">
+        <button type="button" class="button-default" id="PODA-BT" onclick="selectPODAOption('BT', this)">BT</button>
+        <button type="button" class="button-default" id="PODA-MT" onclick="selectPODAOption('MT', this)">MT</button>
+        <button type="button" class="button-default" id="PODA-NAO" onclick="selectPODARealizada(this)">NÃO FOI REALIZADO PODA m²</button><br>
+        <input type="text" id="PODA-input" class="hidden" readonly>
+      </div>
+
+      <!-- Container extra para dados de poda (quantidade, m² e total) – exibido se BT/MT estiver selecionado -->
+      <div id="podaExtras" class="hidden">
+        <div style="display: flex; gap: 10px;">
+          <div style="flex: 1;">
+            <label for="qtdPodas">Qtd. de Podas (unidades):</label>
+            <input type="number" id="qtdPodas" max="999" placeholder="Ex: 3" oninput="atualizarTotalPodas(); gerarMensagem()">
+          </div>
+          <div style="flex: 1;">
+            <label for="totalM2">Soma Total m²:</label>
+            <input type="text" id="totalM2" readonly placeholder="Total m²">
+          </div>
+        </div>
+        <label for="m2PorPoda">Metros quadrados realizados por pontos:</label>
+        <input type="number" id="m2PorPoda" step="any" placeholder="Ex: 15" oninput="atualizarTotalPodas(); gerarMensagem()">
+      </div>
+      
+      <!-- Campos opcionais: Serviço, Material, Sucata, Recurso -->
       <h3>Serviço Realizado?</h3>
       <button class="button-default" data-field="servico" onclick="toggleEditableField('servico', 'sim', this)">Sim</button>
       <button class="button-default" data-field="servico" onclick="toggleEditableField('servico', 'nao', this)">Não</button>
@@ -612,23 +714,24 @@
       </div>
       
       <br><br>
-      <button class="button-gerarMensagem" onclick="gerarMensagem(); document.getElementById('gerar-popup').style.display='block'; showOverlay();">
-        Gerar Mensagem
-      </button>
+      
       
       <br><br>
       <h3>Pré-Visualização da Mensagem</h3>
       <div id="previewBox" class="preview-box"></div>
       
       <div class="share-buttons">
-        <!-- Botão para encaminhar via WhatsApp inicia desabilitado e será habilitado após salvar o PDF -->
+        <button class="button-gerarMensagem" onclick="gerarMensagem(); document.getElementById('gerar-popup').style.display='block'; showOverlay();">
+        Gerar Mensagem
+        </button>
         <button id="whatsappButton" class="button-enviarWhatsApp" onclick="enviarWhatsApp()" disabled>Encaminhar para WhatsApp</button>
         <button id="pdfButton" class="button-default" onclick="savePdf()">Salvar PDF</button>
-      </div>
+        </div>
       <br>
       <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Enel_Group_logo.svg" alt="Logo ENEL" style="width: 193px; height: auto; display: block; margin: auto;">
     </div>
   </div>
+  
   <p style="text-align: center; font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 40px;">
     © 2025 Emanuel Aguiar (Assistente Administrativo Insourcing - Enel CE)<br>
     Todos os direitos reservados.
@@ -694,7 +797,7 @@
       recurso: "SELECIONE O MOTIVO:"
     };
     
-    // Atenção: removemos "ba" da lista para não aplicar a filtragem numérica no campo que usa prefixo!
+    // Remoção da filtragem para o campo que usa prefixo
     document.addEventListener("DOMContentLoaded", function () {
       const camposNumericos = ["ot_ane", "sgd", "inc"];
       camposNumericos.forEach(id => {
@@ -718,17 +821,11 @@
       const buttons = document.querySelectorAll("button[data-field='" + field + "']");
       buttons.forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
-
+    
       if (field === "recurso") {
         if (choice === 'sim') {
           container.classList.add('hidden');
-          let customOptions = [
-            "ENVIAR EQUIPE PESADA",
-            "NECESSARIO EQUIPE DE PODA",
-            "NECESSARIO RECOLHA DE RESÍDUOS",
-            "NECESSÁRIO EQUIPE DO EMERGENCIAL",
-            "OUTROS"
-          ];
+          let customOptions = ["ENVIAR EQUIPE PESADA", "NECESSARIO EQUIPE DE PODA", "NECESSARIO RECOLHA DE RESÍDUOS", "NECESSÁRIO EQUIPE DO EMERGENCIAL", "OUTROS"];
           showOptionsPopup(field, customOptions);
           respRecurso = "SIM";
         } else { 
@@ -740,7 +837,7 @@
         gerarMensagem();
         return;
       }
-
+      
       if (choice === 'sim') {
         container.classList.remove('hidden');
         if (field === "servico") { document.getElementById('descricaoServico').value = ""; respServico = "SIM"; }
@@ -765,6 +862,135 @@
       gerarMensagem();
     }
     
+    // Variável global para armazenar os valores selecionados do TIPO DE PODA (BT e/ou MT)
+    let podaValues = [];
+    // Variável para indicar se o usuário selecionou "NÃO FOI REALIZADO PODA"
+    let podaNaoRealizada = false;
+    
+    function selectPODAOption(value, btn) {
+      // Se o botão "NÃO FOI REALIZADO PODA" estiver selecionado, desmarca-o
+      if (document.getElementById("PODA-NAO").classList.contains("selected")) {
+        document.getElementById("PODA-NAO").classList.remove("selected");
+        podaNaoRealizada = false;
+      }
+      // Toggle: processa a seleção dos botões BT e MT
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        podaValues = podaValues.filter(v => v !== value);
+      } else {
+        btn.classList.add("selected");
+        podaValues.push(value);
+      }
+    
+      const input = document.getElementById("PODA-input");
+      if (podaValues.length > 0) {
+        input.classList.remove("hidden");
+        input.value = podaValues.join("/");
+        // Exibe os campos extras
+        document.getElementById('podaExtras').classList.remove("hidden");
+      } else {
+        input.classList.add("hidden");
+        input.value = "";
+        document.getElementById('podaExtras').classList.add("hidden");
+      }
+      gerarMensagem();
+    }
+    
+    function selectPODARealizada(btn) {
+      // Ao selecionar "NÃO FOI REALIZADO PODA", desmarca BT e MT e limpa o array
+      document.getElementById("PODA-BT").classList.remove("selected");
+      document.getElementById("PODA-MT").classList.remove("selected");
+      podaValues = [];
+      // Toggle: se o botão já estiver selecionado, desmarque; senão, marque
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        podaNaoRealizada = false;
+        document.getElementById("PODA-input").classList.add("hidden");
+        document.getElementById("PODA-input").value = "";
+      } else {
+        btn.classList.add("selected");
+        podaNaoRealizada = true;
+        document.getElementById("PODA-input").classList.remove("hidden");
+        document.getElementById("PODA-input").value = "NÃO FOI REALIZADO PODA m²";
+        document.getElementById('podaExtras').classList.add("hidden");
+        document.getElementById('qtdPodas').value = "";
+        document.getElementById('m2PorPoda').value = "";
+        document.getElementById('totalM2').value = "";
+      }
+      gerarMensagem();
+    }
+    
+    // Atualiza o campo de Total m², com base na quantidade e metros por poda
+    function atualizarTotalPodas() {
+      let qtd = document.getElementById('qtdPodas').value;
+      let m2 = document.getElementById('m2PorPoda').value;
+      if(qtd.trim() !== "" && m2.trim() !== "") {
+          let total = Number(qtd) * Number(m2);
+          document.getElementById('totalM2').value = total;
+      } else {
+          document.getElementById('totalM2').value = "";
+      }
+    }
+    let unitValues = [];
+    let unitNaoRealizada = false;
+
+    function selectPODAUnitOption(value, btn) {
+      // se vinha de "não realizado", limpa aquele estado primeiro
+      if (unitNaoRealizada) {
+        document.getElementById("PODAUNIT-NAO").classList.remove("selected");
+        unitNaoRealizada = false;
+      }
+      // toggle do BT/MT
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        unitValues = unitValues.filter(v => v !== value);
+      } else {
+        btn.classList.add("selected");
+        unitValues.push(value);
+      }
+      // atualiza input e container extra
+      const input = document.getElementById("PODAUNIT-input");
+      if (unitValues.length > 0) {
+        input.classList.remove("hidden");
+        input.value = unitValues.join("/");
+        document.getElementById("podaUnitExtras").classList.remove("hidden");
+      } else {
+        input.classList.add("hidden");
+        input.value = "";
+        document.getElementById("podaUnitExtras").classList.add("hidden");
+      }
+      gerarMensagem();
+    }
+
+    function selectPODAUnitRealizada(btn) {
+      // desmarca BT e MT
+      document.getElementById("PODAUNIT-BT").classList.remove("selected");
+      document.getElementById("PODAUNIT-MT").classList.remove("selected");
+      unitValues = [];
+
+      // toggle no "não realizado"
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        unitNaoRealizada = false;
+        document.getElementById("PODAUNIT-input").classList.add("hidden");
+        document.getElementById("PODAUNIT-input").value = "";
+      } else {
+        btn.classList.add("selected");
+        unitNaoRealizada = true;
+        document.getElementById("PODAUNIT-input").classList.remove("hidden");
+        document.getElementById("PODAUNIT-input").value = "NÃO FOI REALIZADO PODA UNITÁRIA";
+        document.getElementById("podaUnitExtras").classList.add("hidden");
+        document.getElementById("qtdPodasUnit").value = "";
+        document.getElementById("totalUnit").value = "";
+      }
+      gerarMensagem();
+    }
+
+    function atualizarTotalPodasUnit() {
+      const qtd = document.getElementById("qtdPodasUnit").value;
+      document.getElementById("totalUnit").value = qtd.trim() !== "" ? qtd : "";
+    }
+  
     function formatarData(data) {
       const partes = data.split("-");
       return `${partes[2]}/${partes[1]}/${partes[0]}`;
@@ -853,75 +1079,121 @@
     }
     
     function gerarMensagem() {
-      let msg = `------- *DADOS DA BAIXA* -------\n`;
+      let msg = `------- *DADOS DA EQUIPE* -------\n`;
+      // Grupo 1: Dados da Equipe
+      msg += `*TIPO DE EQUIPE:* ${document.getElementById('selectedTeamType').value.toUpperCase()}\n`;
       msg += `*NOME:* ${document.getElementById('pessoa').value.toUpperCase()}\n`;
       msg += `*LEAD:* ${document.getElementById('lead').value.toUpperCase()}\n`;
-      msg += `*BR LÍDER:* ${document.getElementById('br1').value.toUpperCase()}\n`;
+      msg += `*BR LÍDER:* ${document.getElementById('br1').value.toUpperCase()}\n\n`;
+
+      // Grupo 2: Dados da Execução
+      msg += `---- *DADOS DA DOCUMENTAÇÃO* ----\n`;
       msg += `*OT/ANE:* ${document.getElementById('ot_ane').value.toUpperCase()}\n`;
       msg += `*SGM:* ${document.getElementById('sgm').value.toUpperCase()}\n`;
-      msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
       msg += `*BA:* ${document.getElementById('ba').value.toUpperCase()}\n`;
       msg += `*SGD:* ${document.getElementById('sgd').value.toUpperCase()}\n`;
       msg += `*INC:* 00${document.getElementById('inc').value.toUpperCase()}\n`;
       msg += `*DT:* ${document.getElementById('dt').value.toUpperCase()}\n`;
       msg += `*APR DIGITAL:* ${document.getElementById('apr').value.toUpperCase()}\n`;
       msg += `*APR MANUAL:* ${document.getElementById('apr2').value.toUpperCase()}\n`;
-      msg += `*5RO:* ${cincoROValue.toUpperCase()}\n`;
+      msg += `*5RO:* ${cincoROValue.toUpperCase()}\n\n`;
+
+      // Grupo 3: Informação de Campo
+      msg += `---- *INFORMAÇÃO DE CAMPO* ----\n`;
       msg += `*TRAFO:* ${document.getElementById('traf').value.toUpperCase()}\n`;
       msg += `*TOMBAMENTO:* ${document.getElementById('Tomb').value.toUpperCase()}\n`;
       msg += `*ESTRUTURA:* ${document.getElementById('estrut').value.toUpperCase()}\n`;
       msg += `*ALIM:* ${document.getElementById('alim').value.toUpperCase()}\n`;
-      msg += `*ENDEREÇO:* ${document.getElementById('endereco').value.toUpperCase()}\n`;
+      msg += `*ENDEREÇO:* ${document.getElementById('endereco').value.toUpperCase()}\n\n`;
+
+      // Grupo 4: Detalhes da Atividade
+      msg += `---- *DETALHES DA ATIVIDADE* ----\n`;
+      msg += `*DATA:* ${formatarData(document.getElementById('data').value).toUpperCase()}\n`;
       msg += `*HORÁRIO INÍCIO:* ${document.getElementById('start-time').value.toUpperCase()}\n`;
       msg += `*HORÁRIO FINAL:* ${document.getElementById('end-time').value.toUpperCase()}\n\n`;
-      msg += `------- *DESCRIÇÃO ATIVIDADE* -------\n\n`;
-      
-      // Processamento dos campos opcionais
+
+      // Grupo 5: Dados de Poda
+      msg += `------ *DETALHES DA PODA* ------\n`;
+      // ——— Poda Unitária ———
+      if (unitValues.length > 0) {
+        msg += `*TIPO DE PODA UNITÁRIA:* ${document.getElementById('PODAUNIT-input').value.toUpperCase()}\n`;
+        const qtdUnit = document.getElementById('qtdPodasUnit').value;
+        if (qtdUnit.trim() !== "") {
+          msg += `*QUANTIDADE DE PODAS UNITÁRIAS:* ${qtdUnit}\n`;
+        }
+        const totalUnit = document.getElementById('totalUnit').value;
+        if (totalUnit.trim() !== "") {
+          msg += `*TOTAL DE UNIDADES:* ${totalUnit}\n`;
+        }
+      } else if (unitNaoRealizada) {
+        msg += `*PODA UNITÁRIA:* NÃO FOI REALIZADO PODA UNITÁRIA\n`;
+      }
+      msg += `\n`;
+
+      // ——— Poda em m² ———
+      if (podaValues.length > 0) {
+        msg += `*TIPO DE PODA m²:* ${document.getElementById('PODA-input').value.toUpperCase()}\n`;
+        const qtdPodas = document.getElementById('qtdPodas').value;
+        if (qtdPodas.trim() !== "") {
+          msg += `*QUANTIDADE DE PODAS m²:* ${qtdPodas}\n`;
+        }
+        const m2PorPoda = document.getElementById('m2PorPoda').value;
+        if (m2PorPoda.trim() !== "") {
+          const totalM2 = Number(qtdPodas) * Number(m2PorPoda);
+          msg += `*M² TOTAL:* ${totalM2}\n`;
+        }
+      } else if (podaNaoRealizada) {
+        msg += `*PODA:* NÃO FOI REALIZADO PODA\n`;
+      }
+      msg += `\n`;
+
+      // Grupo 6: Descrição da Atividade (campos opcionais)
+      msg += `---- *DESCRIÇÃO ATIVIDADE* ----\n`;
       if (respServico === "SIM") {
         let desc = document.getElementById('descricaoServico').value;
-        if(desc.trim() !== "") {
+        if (desc.trim() !== "") {
           msg += `*SERVIÇO REALIZADO*\n${desc.toUpperCase()}\n\n`;
         }
       } else if (respServico === "NÃO") {
         let note = document.getElementById('descricaoServico').value;
-        if(note.trim() !== "") {
+        if (note.trim() !== "") {
           msg += `*SERVIÇO NÃO REALIZADO MOTIVO:*\n${note.toUpperCase()}\n\n`;
         }
       }
       if (respMaterial === "SIM") {
         let desc = document.getElementById('descricaoMaterial').value;
-        if(desc.trim() !== "") {
+        if (desc.trim() !== "") {
           msg += `*MATERIAL UTILIZADO*\n${desc.toUpperCase()}\n\n`;
         }
       } else if (respMaterial === "NÃO") {
         let note = document.getElementById('descricaoMaterial').value;
-        if(note.trim() !== "") {
+        if (note.trim() !== "") {
           msg += `*MATERIAL NÃO UTILIZADO MOTIVO:*\n${note.toUpperCase()}\n\n`;
         }
       }
       if (respSucata === "SIM") {
         let desc = document.getElementById('descricaoSucata').value;
-        if(desc.trim() !== "") {
+        if (desc.trim() !== "") {
           msg += `*DEVOLUÇÃO SUCATA GERADA*\n${desc.toUpperCase()}\n\n`;
         }
       } else if (respSucata === "NÃO") {
         let note = document.getElementById('descricaoSucata').value;
-        if(note.trim() !== "") {
+        if (note.trim() !== "") {
           msg += `*DEVOLUÇÃO SUCATA NÃO GERADA MOTIVO:*\n${note.toUpperCase()}\n\n`;
         }
       }
       if (respRecurso === "SIM") {
         let desc = document.getElementById('descricaoRecurso').value;
-        if(desc.trim() !== "") {
+        if (desc.trim() !== "") {
           msg += `*NECESSÁRIO OUTRO RECURSO?*\n${desc.toUpperCase()}\n\n`;
         }
       } else if (respRecurso === "NÃO") {
         let note = document.getElementById('descricaoRecurso').value;
-        if(note.trim() !== "") {
+        if (note.trim() !== "") {
           msg += `*NECESSÁRIO OUTRO RECURSO MOTIVO:*\n${note.toUpperCase()}\n\n`;
         }
       }
-      
+      msg += `------ *FIM RELATÓRIO* ------\n`;
       let sessionTime = "";
       if (globalTimerStart) {
         let sessionSeconds = Math.floor((Date.now() - globalTimerStart) / 1000);
@@ -930,24 +1202,50 @@
       let now = new Date();
       let fullDate = formatFullDateTime(now);
       msg += `${sessionTime}${fullDate}`;
-      
+
       document.getElementById('previewBox').textContent = msg;
     }
     
     function verificarCamposRespondidos() {
       let missing = [];
-      let data = document.getElementById('data').value;
-      if (!data || data.trim() === "") { missing.push("📅 Data"); }
+      let teamType = document.getElementById('selectedTeamType').value;
+      if (!teamType || teamType.trim() === "") { 
+          missing.push("⚠️ Tipo de Equipe");
+      }
+
       let pessoa = document.getElementById('pessoa').value;
       if (!pessoa || pessoa === "NENHUM") { missing.push("👤 Nome do Componente"); }
+      
       let lead = document.getElementById('lead').value;
       if (!lead || lead === "NENHUM") { missing.push("🏷️ LEAD"); }
+
       let brLider = document.getElementById('br1').value;
-      if (!brLider || brLider.trim() === "") { missing.push("🆔 BR LÍDER"); }
+      if (!brLider || brLider.trim() === "" || brLider.trim().toUpperCase() === "BR") {
+        missing.push("🆔 BR LÍDER");
+      }
+      
+      let data = document.getElementById('data').value;
+      if (!data || data.trim() === "") { missing.push("📅 Data"); }
+
       let startTime = document.getElementById('start-time').value;
-      if (!startTime || startTime.trim() === "") { missing.push("🕒 Horário de Início da atividade"); }
+      if (!startTime || startTime.trim() === "") { missing.push("🕒 Início da atividade"); }
+
       let endTime = document.getElementById('end-time').value;
-      if (!endTime || endTime.trim() === "") { missing.push("🕒 Horário Final da atividade"); }
+      if (!endTime || endTime.trim() === "") { missing.push("🕒  Final da atividade"); }
+
+      // VALIDANDO O CAMPO TIPO DE EQUIPE
+      
+
+      // ... validação dos campos de PODA e dos campos opcionais
+      if ((!podaValues.length) && !podaNaoRealizada) {
+          missing.push("🌳 Selecione uma opção no campo de Poda");
+      } else if (podaValues.length > 0) {
+          let qtdPodas = document.getElementById('qtdPodas').value;
+          let m2PorPoda = document.getElementById('m2PorPoda').value;
+          if (qtdPodas.trim() === "") { missing.push("🌳 Insira Qtd. total de podas realizadas"); }
+          if (m2PorPoda.trim() === "") { missing.push("🌳 Insira Qtd. realizada (m²)"); }
+      }
+
       for (let key in fieldsAnswered) {
         if (!fieldsAnswered[key]) {
           if (key === "servico") { missing.push("🔧 Serviço Realizado"); }
@@ -956,8 +1254,9 @@
           else if (key === "recurso") { missing.push("❗ Necessário Outro Recurso"); }
         }
       }
+
       if (missing.length > 0) {
-        let msg = "Por favor, preencha os seguintes campos obrigatórios:<br>" + missing.join("<br>");
+        let msg = "PREENCHA OS CAMPOS OBRIGATÓRIOS🚨<br><br>" + missing.join("<br>");
         let popup = document.getElementById('obrigatorio-popup');
         popup.innerHTML = `<p>${msg}</p>
           <div class="popup-buttons">
@@ -974,10 +1273,10 @@
       if (!pdfSaved) {
         let popup = document.getElementById('pdf-warning-popup');
         popup.innerHTML = `
-              <p>Salve primeiro o PDF! Antes de encaminhar</p>
-              <div class="popup-buttons">
-                <button onclick="document.getElementById('pdf-warning-popup').style.display='none'; hideOverlay();">Fechar</button>
-              </div>`;
+          <p>Salve primeiro o PDF! Antes de encaminhar</p>
+          <div class="popup-buttons">
+            <button onclick="document.getElementById('pdf-warning-popup').style.display='none'; hideOverlay();">Fechar</button>
+          </div>`;
         popup.style.display = 'block';
         showOverlay();
         return;
@@ -1156,7 +1455,6 @@
       scheduleAutoPreviewUpdate();
     }
     
-    // Função para reposicionar o cursor se estiver antes do prefixo (não bloqueia o evento)
     function enforcePrefix(e, prefix) {
       const input = e.target;
       setTimeout(() => {
@@ -1166,9 +1464,6 @@
       }, 0);
     }
     
-    // Função para corrigir o valor do campo mantendo o prefixo.
-    // Se o valor tiver tamanho menor que o prefixo, restaura o valor para o prefixo.
-    // Se o valor não começar com o prefixo, concatena o prefixo com o restante digitado.
     function fixPrefixInput(el, prefix) {
       let currentVal = el.value;
       if (currentVal.length < prefix.length) {
@@ -1179,6 +1474,16 @@
         el.value = prefix + withoutPrefix;
         el.setSelectionRange(prefix.length, prefix.length);
       }
+    }
+    // Função que marca o botão clicado e preenche o campo read-only
+    function selectTeamType(teamType, btn) {
+      // Remove a classe 'selected' de todos os botões
+      const buttons = document.querySelectorAll('#teamButtons button');
+      buttons.forEach(b => b.classList.remove('selected'));
+      // Adiciona a classe 'selected' ao botão clicado
+      btn.classList.add('selected');
+      // Preenche o campo somente leitura com o valor escolhido
+      document.getElementById('selectedTeamType').value = teamType;
     }
   </script>
 </body>
