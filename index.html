@@ -457,10 +457,10 @@
       <!-- Seção para seleção do Tipo de Equipe -->
       <div id="teamSelection">
           <div id="teamButtons">
-          <button type="button" class="button-default" onclick="selectTeamType('LINHA VIVA PROGRAMADA', this)">(LR/LC/LE/LV) <BR>PROGRAMADA</button>
-          <button type="button" class="button-default" onclick="selectTeamType('LINHA VIVA EMERGENCIAL', this)">(LR/LC/LE/LV)<BR>EMERGENCIAL</button>
+          <button type="button" class="button-default" onclick="selectTeamType('LINHA VIVA PROGRAMADA', this)">(LR/LC/LE/LL) <BR>PROGRAMADA</button>
+          <button type="button" class="button-default" onclick="selectTeamType('LINHA VIVA EMERGENCIA', this)">(LR/LC/LE/LL)<BR>EMERGENCIAL</button>
           <button type="button" class="button-default" onclick="selectTeamType('MANUTENÇÃO PROGRAMADA', this)">(EP/PP)<BR>PROGRAMADA</button>
-          <button type="button" class="button-default" onclick="selectTeamType('MANUTENÇÃO EMERGENCIAL', this)">(EP/PP) <BR>EMERGENCIAL</button>
+          <button type="button" class="button-default" onclick="selectTeamType('MANUTENÇÃO EMERGENCIA', this)">(EP/PP) <BR>EMERGENCIAL</button>
           <button type="button" class="button-default" onclick="selectTeamType('PODA EMERGENCIA', this)">(PD) <BR>EMERGENCIA</button>
           <button type="button" class="button-default" onclick="selectTeamType('EMERGENCIA', this)">(SI/SG/RD) <BR>EMERGENCIA</button>
         </div>
@@ -632,7 +632,7 @@
                   onclick="selectPODAUnitOption('MT', this)">MT</button>
           <button type="button" id="PODAUNIT-NAO" class="button-default"
                   onclick="selectPODAUnitRealizada(this)">
-            NÃO FOI REALIZADO PODA UNITÁRIA
+            NÃO FOI REALIZADO PODA (Unidades)
           </button><br>
           <input type="text" id="PODAUNIT-input" class="hidden" readonly>
         </div>
@@ -660,7 +660,7 @@
       <div id="PODA-container">
         <button type="button" class="button-default" id="PODA-BT" onclick="selectPODAOption('BT', this)">BT</button>
         <button type="button" class="button-default" id="PODA-MT" onclick="selectPODAOption('MT', this)">MT</button>
-        <button type="button" class="button-default" id="PODA-NAO" onclick="selectPODARealizada(this)">NÃO FOI REALIZADO PODA m²</button><br>
+        <button type="button" class="button-default" id="PODA-NAO" onclick="selectPODARealizada(this)">NÃO FOI REALIZADO PODA (m²)</button><br>
         <input type="text" id="PODA-input" class="hidden" readonly>
       </div>
 
@@ -911,7 +911,7 @@
         btn.classList.add("selected");
         podaNaoRealizada = true;
         document.getElementById("PODA-input").classList.remove("hidden");
-        document.getElementById("PODA-input").value = "NÃO FOI REALIZADO PODA m²";
+        document.getElementById("PODA-input").value = "NÃO FOI REALIZADO PODA (m²)";
         document.getElementById('podaExtras').classList.add("hidden");
         document.getElementById('qtdPodas').value = "";
         document.getElementById('m2PorPoda').value = "";
@@ -978,7 +978,7 @@
         btn.classList.add("selected");
         unitNaoRealizada = true;
         document.getElementById("PODAUNIT-input").classList.remove("hidden");
-        document.getElementById("PODAUNIT-input").value = "NÃO FOI REALIZADO PODA UNITÁRIA";
+        document.getElementById("PODAUNIT-input").value = "NÃO FOI REALIZADO PODA (Unidades)";
         document.getElementById("podaUnitExtras").classList.add("hidden");
         document.getElementById("qtdPodasUnit").value = "";
         document.getElementById("totalUnit").value = "";
@@ -1116,17 +1116,17 @@
       msg += `------ *DETALHES DA PODA* ------\n`;
       // ——— Poda Unitária ———
       if (unitValues.length > 0) {
-        msg += `*TIPO DE PODA UNITÁRIA:* ${document.getElementById('PODAUNIT-input').value.toUpperCase()}\n`;
+        msg += `*TIPO DE PODA UNID:* ${document.getElementById('PODAUNIT-input').value.toUpperCase()}\n`;
         const qtdUnit = document.getElementById('qtdPodasUnit').value;
         if (qtdUnit.trim() !== "") {
-          msg += `*QUANTIDADE DE PODAS UNITÁRIAS:* ${qtdUnit}\n`;
+          msg += `*QUANTIDADE DE PODAS UNID:* ${qtdUnit}\n`;
         }
         const totalUnit = document.getElementById('totalUnit').value;
         if (totalUnit.trim() !== "") {
-          msg += `*TOTAL DE UNIDADES:* ${totalUnit}\n`;
+          msg += `*TOTAL P/ UNID:* ${totalUnit}\n`;
         }
       } else if (unitNaoRealizada) {
-        msg += `*PODA UNITÁRIA:* NÃO FOI REALIZADO PODA UNITÁRIA\n`;
+        msg += `*PODA P/ UNID:* NÃO FOI REALIZADO PODA POR UNIDADES\n`;
       }
       msg += `\n`;
 
@@ -1140,10 +1140,10 @@
         const m2PorPoda = document.getElementById('m2PorPoda').value;
         if (m2PorPoda.trim() !== "") {
           const totalM2 = Number(qtdPodas) * Number(m2PorPoda);
-          msg += `*M² TOTAL:* ${totalM2}\n`;
+          msg += `*M² TOTAL REALIZADOS:* ${totalM2}\n`;
         }
       } else if (podaNaoRealizada) {
-        msg += `*PODA:* NÃO FOI REALIZADO PODA\n`;
+        msg += `*PODA P/ M²:* NÃO FOI REALIZADO PODA POR M²\n`;
       }
       msg += `\n`;
 
