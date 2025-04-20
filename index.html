@@ -319,7 +319,7 @@
       text-align: left;
     }
     .input-container input {
-      width: 95%;
+      width: 70%;
       padding: 4px;
       font-size: 14px;
       border: 1px solid #ccc;
@@ -367,6 +367,16 @@
       flex-wrap: wrap;
       gap: 5px;
       margin-bottom: 10px;
+    }
+        #podaUnitExtras input {
+      width: 80px;      /* ajuste para o tamanho que quiser */
+      max-width: 100%;  /* impede extrapolar o container */
+    }
+
+    /* para os campos da poda em m² */
+    #podaExtras input {
+      width: 80px;      /* ou 60px, 100px, em%, em, etc */
+      max-width: 100%;
     }
   </style>
 </head>
